@@ -5,12 +5,23 @@ public abstract class Product {
 	protected String name;
 	protected float price;
 	protected int id;
+	protected int stock;
 	private static int nextId = 0;
+	
 
-	public Product(String name, float price, int id) {
+	public Product(String name, float price, int id,int stock) {
 		this.name = name;
 		this.price = price;
+		this.stock = stock;
 		this.id = nextId++;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public String getName() {

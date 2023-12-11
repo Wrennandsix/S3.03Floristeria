@@ -4,8 +4,8 @@ public class Decor extends Product {
 
 	private String type;
 
-	public Decor(String name, float price, int id, String type) {
-		super(name, price, id);
+	public Decor(String name, float price, int id, String type,int stock) {
+		super(name, price, id, stock);
 		this.type = type;
 	}
 
@@ -21,5 +21,4 @@ public class Decor extends Product {
 	public String toString() {
 		return "Decor [type=" + type + ", name=" + name + ", price=" + price + ", id=" + id + "]";
 	}
-
 }
