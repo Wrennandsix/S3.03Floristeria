@@ -2,23 +2,23 @@ package productsHierarchy;
 
 public class Decor extends Product {
 
-	private String type;
+	private String material;
 
-	public Decor(String name, float price, int id, String type,int stock) {
-		super(name, price, id, stock);
-		this.type = type;
+	public Decor(String name, float price, String type, int stock) {
+		super(name, price, stock);
+		this.material = material;
 	}
 
-	public String getType() {
-		return type;
+	public String getMaterial() {
+		return material;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setMaterial(String material) {
+		this.material = material;
 	}
 
 	@Override
 	public String toString() {
-		return "Decor [type=" + type + ", name=" + name + ", price=" + price + ", id=" + id + "]";
+		return "Decor [type=" + material + ", name=" + name + ", price=" + price + ", id=" + id + "]";
 	}
 }
