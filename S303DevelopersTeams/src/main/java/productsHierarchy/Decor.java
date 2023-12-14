@@ -4,7 +4,7 @@ public class Decor extends Product {
 
 	private String material;
 
-	public Decor(String name, float price, String type, int stock) {
+	public Decor(String name, float price, String material , int stock) {
 		super(name, price, stock);
 		this.material = material;
 	}

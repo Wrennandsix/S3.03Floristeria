@@ -1,7 +1,9 @@
 package Florist;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import exceptions.NoStockException;
@@ -62,54 +64,83 @@ public class Florist {
 		return id;
 	}
 
+	public int requestTree() {
 
+		int id;
 
-	public void addTree() {
-		
+		System.out.println("Introdueix el id del arbre existent a la base de dades al cual vols afegir stock.");
+		id = sc.nextInt();
+		return id;
+
+	}
+
+	public int requestNewTree() {
+
+		int id;
+
+		System.out.println("Introdueix el id del arbre nou per comprobar que no existeix a la base de dades.");
+		id = sc.nextInt();
+		return id;
+
+	}
+
+	public void showTree() {
+
+		System.out.println("Arbres actuals a la base de dades:");
+
+		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
+				+ tree.getHeight() + "	Stock: " + tree.getStock()));
+
+	}
+
+	public Tree findTree(int id) {
+
+		Optional<Tree> treeFound = treeList.stream().filter(tree -> tree.getId() == id).findFirst();
+
+		return treeFound.orElse(null);
+	}
+
+	public void addNewTree(Tree tree) {
+
 		String name;
 		float price;
 		float height;
 		int stock;
-		int id;
 
-		if(treeList.size() < 1) {
-			System.out.println("Nom abre:");
+		if (tree == null) {
+			System.out.println("Nom arbre:");
 			name = sc.nextLine();
-			System.out.println("Preu abre:");
+			System.out.println("Preu arbre:");
 			price = sc.nextFloat();
-			System.out.println("Alçada abre");
+			System.out.println("Alçada arbre");
 			height = sc.nextFloat();
 			System.out.println("Quantitat d'abres:");
 			stock = sc.nextInt();
-			treeList.add(new Tree(name, price, height, stock));
-			System.out.println("Abre afegit!");
+			tree = new Tree(name, price, height, stock);
+			treeList.add(tree);
+			System.out.println("Abre afegit: " + tree);
 			sc.nextLine();
-			
-		}else {
-			System.out.println("Introdueix el id de l'abre o introdueix '0' per afegir un abre nou:");
-			treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: " + tree.getHeight()));
 
-			id = sc.nextInt();
-			if(id == 0) {
-				System.out.println("Nom abre:");
-				name = sc.nextLine();
-				System.out.println("Preu abre:");
-				price = sc.nextFloat();
-				System.out.println("Alçada abre");
-				height = sc.nextFloat();
-				System.out.println("Quantitat d'abres:");
-				stock = sc.nextInt();
-				treeList.add(new Tree(name, price, height, stock));
-				System.out.println("Abre afegit!");
-			}else {
-				System.out.println("Quantitat d'abres:");
-				stock = sc.nextInt();
-				treeList.get(id).setStock(treeList.get(id).getStock() + stock);
-			}
+		} else {
+			System.out.println("L'arbre que intentes introduir: " + tree
+					+ " Ja existeix a la base de dades sisplau escolleix l'opcio d'afegir stock a un arbre existent");
 		}
-		
-		
 	}
+
+	public void addStockTree(Tree tree) {
+		int stock;
+
+		if (tree == null) {
+			System.out.println("L'arbre introduit no existeix en la base de dades, registral com a nou");
+		} else {
+			System.out.println("Introdueix la quantitat de stock a afegir a l'arbre: ");
+			stock = sc.nextInt();
+			tree.setStock(tree.getStock() + stock);
+			System.out.println("L'stock atualitzat es de: " + tree.getStock() + " del arbre: " + tree.getName()
+			+ " amb una alçada de: " + tree.getHeight() + " cm");
+		}
+	}
+
 	public void addFlower() {
 		
 		String name;
