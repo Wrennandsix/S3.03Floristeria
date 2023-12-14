@@ -29,8 +29,9 @@ public class App {
 			switch (opcio) {
 			case 1:
 				f.showTree();
-				int id = f.requestNewTree();
-				Tree tree = f.findTree(id);
+				String name = f.requestNewTreeName();
+				float height = f.requestNewTreeHeight();
+				Tree tree = f.findTree(name,height);
 				f.addNewTree(tree);
 				break;
 			case 2:
@@ -85,8 +86,8 @@ public class App {
 		
 		Florist f = new Florist("Floristeria 1");
 		
-		f.getTreeList().add(new Tree("abre1", 2, 12, 2));
-		f.getTreeList().add(new Tree("abre2", 2, 12, 2));
+		f.getTreeList().add(new Tree("arbre1", 2, 12, 2));
+		f.getTreeList().add(new Tree("arbre2", 2, 12, 2));
 		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
 		f.getFlowerList().add(new Flower("flor1", 2, "blau", 5));
 		f.getDecorList().add(new Decor("flor1", 2, "fusta", 2));

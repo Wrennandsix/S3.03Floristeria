@@ -74,13 +74,22 @@ public class Florist {
 
 	}
 
-	public int requestNewTree() {
+	public String requestNewTreeName() {
 
-		int id;
+		String name;
+		System.out.println("Introdueix el nom del arbre nou per comprobar que no existeix a la base de dades.");
+		name = sc.next();
+		sc.nextLine();
+		return name;
 
-		System.out.println("Introdueix el id del arbre nou per comprobar que no existeix a la base de dades.");
-		id = sc.nextInt();
-		return id;
+	}
+	public float requestNewTreeHeight() {
+
+		float height;
+		System.out.println("Introdueix l'alçada del arbre nou per comprobar que no existeix a la base de dades.");
+		height = sc.nextFloat();
+		sc.nextLine();
+		return height;
 
 	}
 
@@ -99,6 +108,15 @@ public class Florist {
 
 		return treeFound.orElse(null);
 	}
+	
+	public Tree findTree(String name, float height) {
+
+		Optional<Tree> treeFound = treeList.stream()
+				.filter(tree -> tree.getName().equalsIgnoreCase(name) && tree.getHeight() == height)
+				.findFirst();
+
+		return treeFound.orElse(null);
+	}
 
 	public void addNewTree(Tree tree) {
 
@@ -108,6 +126,7 @@ public class Florist {
 		int stock;
 
 		if (tree == null) {
+			
 			System.out.println("Nom arbre:");
 			name = sc.nextLine();
 			System.out.println("Preu arbre:");
