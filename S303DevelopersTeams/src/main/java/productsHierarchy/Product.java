@@ -1,5 +1,7 @@
 package productsHierarchy;
 
+import java.util.Objects;
+
 public abstract class Product {
 
 	protected String name;
@@ -45,5 +47,23 @@ public abstract class Product {
 	public int getId() {
 		return id;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, price);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Objects.equals(name, other.name) && Float.floatToIntBits(price) == Float.floatToIntBits(other.price);
+	}
+	
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import exceptions.NoStockException;
 import productsHierarchy.Decor;
@@ -102,31 +103,32 @@ public class Florist {
 
 	}
 
-	public Tree findTree(int id) {
-
-		Optional<Tree> treeFound = treeList.stream().filter(tree -> tree.getId() == id).findFirst();
-
-		return treeFound.orElse(null);
+	public <T> int findIndex(List<T> list, Object obj) {
+		
+		Optional<Integer> index = IntStream.range(0, list.size())
+                .filter(i -> list.get(i).equals(obj))
+                .boxed()
+                .findFirst();
+		
+		return index.orElse(-1);
 	}
 	
-	public Tree findTree(String name, float height) {
+	public Tree findTree(Tree tree) {
 
 		Optional<Tree> treeFound = treeList.stream()
-				.filter(tree -> tree.getName().equalsIgnoreCase(name) && tree.getHeight() == height)
+				.filter(t -> t.getName().equalsIgnoreCase(tree.getName()) && t.getHeight() == tree.getHeight())
 				.findFirst();
 
 		return treeFound.orElse(null);
 	}
 
-	public void addNewTree(Tree tree) {
+	public void addNewTree() {
 
 		String name;
 		float price;
 		float height;
 		int stock;
 
-		if (tree == null) {
-			
 			System.out.println("Nom arbre:");
 			name = sc.nextLine();
 			System.out.println("Preu arbre:");
@@ -135,25 +137,25 @@ public class Florist {
 			height = sc.nextFloat();
 			System.out.println("Quantitat d'abres:");
 			stock = sc.nextInt();
-			tree = new Tree(name, price, height, stock);
-			treeList.add(tree);
-			System.out.println("Abre afegit: " + tree);
+			Tree tree = new Tree(name, price, height, stock);
+			if(findTree(tree) == null) {
+				treeList.add(tree);
+				System.out.println("Abre afegit: " + tree);
+			}else {
+				System.out.println("Abre ja existent!");
+				int index = findIndex(treeList, tree);
+				addStockTree(treeList.get(index), stock);
+			}
 			sc.nextLine();
 
-		} else {
-			System.out.println("L'arbre que intentes introduir: " + tree
-					+ " Ja existeix a la base de dades sisplau escolleix l'opcio d'afegir stock a un arbre existent");
-		}
+
 	}
 
-	public void addStockTree(Tree tree) {
-		int stock;
+	public void addStockTree(Tree tree, int stock) {
 
 		if (tree == null) {
 			System.out.println("L'arbre introduit no existeix en la base de dades, registral com a nou");
 		} else {
-			System.out.println("Introdueix la quantitat de stock a afegir a l'arbre: ");
-			stock = sc.nextInt();
 			tree.setStock(tree.getStock() + stock);
 			System.out.println("L'stock atualitzat es de: " + tree.getStock() + " del arbre: " + tree.getName()
 			+ " amb una alçada de: " + tree.getHeight() + " cm");

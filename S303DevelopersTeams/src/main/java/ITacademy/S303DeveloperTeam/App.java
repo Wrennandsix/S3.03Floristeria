@@ -17,7 +17,7 @@ public class App {
 		/*try {
 			f.removeTree();
 		} catch (NoStockException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}*/
 		Florist f = createDataBase();
 		
@@ -28,17 +28,10 @@ public class App {
 
 			switch (opcio) {
 			case 1:
-				f.showTree();
-				String name = f.requestNewTreeName();
-				float height = f.requestNewTreeHeight();
-				Tree tree = f.findTree(name,height);
-				f.addNewTree(tree);
+				f.addNewTree();
 				break;
 			case 2:
 				f.showTree();
-				int id2 = f.requestTree();
-				Tree tree2 = f.findTree(id2);
-				f.addStockTree(tree2);
 				break;
 			case 3:
 
@@ -86,11 +79,15 @@ public class App {
 		
 		Florist f = new Florist("Floristeria 1");
 		
-		f.getTreeList().add(new Tree("arbre1", 2, 12, 2));
-		f.getTreeList().add(new Tree("arbre2", 2, 12, 2));
+		f.getTreeList().add(new Tree("arbre1", 33, 12, 1));
+		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
+		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
+		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
+		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
+		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
 		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
-		f.getFlowerList().add(new Flower("flor1", 2, "blau", 5));
-		f.getDecorList().add(new Decor("flor1", 2, "fusta", 2));
+		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
+		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
 
 		//System.out.println("preu total: " + f.valueTotal() + "€");
 		
