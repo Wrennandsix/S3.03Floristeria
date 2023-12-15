@@ -28,25 +28,25 @@ public class App {
 
 			switch (opcio) {
 			case 1:
-				f.addNewTree();
+				f.addTree();
 				break;
 			case 2:
-				f.showTree();
+				f.addFlower();
 				break;
 			case 3:
-
+				f.addDecor();
 				break;
 			case 4:
 
 				break;
 			case 5:
-
+				f.showTrees();
 				break;
 			case 6:
-
+				f.showFlowers();
 				break;
 			case 7:
-
+				f.showDecors();
 				break;
 			case 8:
 
@@ -66,12 +66,10 @@ public class App {
 		Scanner sc = new Scanner(System.in);
 		
 		int option = 0;
-		System.out.println("*** Welcome to the florist manager ***\n" + "1- Afegir un nou arbre a la base de dades.\n"
-				+ "2- Afegir stock a un arbre ja existent a la base de dades\n"
-				+ "3- Show the lowest priced items from all the sellers in a city\n"
-				+ "4- Show all items of an item type ordered by price.\n" + "5- Buy an item from another Person.\n"
-				+ "6- Create person in our database\n" + "7- Add new item to a Person\n" + "8- Shut down the app");
-		
+		System.out.println("*** Welcome to the florist manager ***\n"
+				+ "1- Afegir un arbre a la base de dades.\n"
+				+ "2- Afegir una flor a la base de dades.\n"
+				+ "3- Afegir una flor a la base de dades.\n");
 		option = sc.nextInt();	
 		return option;
 	}

@@ -65,7 +65,7 @@ public class Florist {
 		return id;
 	}
 
-	public int requestTree() {
+	/*public int requestTree() {
 
 		int id;
 
@@ -92,17 +92,10 @@ public class Florist {
 		sc.nextLine();
 		return height;
 
-	}
+	}*/
 
-	public void showTree() {
 
-		System.out.println("Arbres actuals a la base de dades:");
-
-		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
-				+ tree.getHeight() + "	Stock: " + tree.getStock()));
-
-	}
-
+	//cambiar de clase
 	public <T> int findIndex(List<T> list, Object obj) {
 		
 		Optional<Integer> index = IntStream.range(0, list.size())
@@ -113,16 +106,8 @@ public class Florist {
 		return index.orElse(-1);
 	}
 	
-	public Tree findTree(Tree tree) {
 
-		Optional<Tree> treeFound = treeList.stream()
-				.filter(t -> t.getName().equalsIgnoreCase(tree.getName()) && t.getHeight() == tree.getHeight())
-				.findFirst();
-
-		return treeFound.orElse(null);
-	}
-
-	public void addNewTree() {
+	public void addTree() {
 
 		String name;
 		float price;
@@ -150,6 +135,15 @@ public class Florist {
 
 
 	}
+	
+	public Tree findTree(Tree tree) {
+
+		Optional<Tree> treeFound = treeList.stream()
+				.filter(t -> t.getName().equalsIgnoreCase(tree.getName()) && t.getHeight() == tree.getHeight())
+				.findFirst();
+
+		return treeFound.orElse(null);
+	}
 
 	public void addStockTree(Tree tree, int stock) {
 
@@ -161,6 +155,15 @@ public class Florist {
 			+ " amb una alçada de: " + tree.getHeight() + " cm");
 		}
 	}
+	
+	public void showTrees() {
+
+		System.out.println("Arbres actuals a la base de dades:");
+
+		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
+				+ tree.getHeight() + "	Stock: " + tree.getStock()));
+
+	}
 
 	public void addFlower() {
 		
@@ -168,99 +171,127 @@ public class Florist {
 		float price;
 		String colour;
 		int stock;
-		int id;
 
-		if(flowerList.size() < 1) {
 			System.out.println("Nom flor:");
 			name = sc.nextLine();
 			System.out.println("Preu flor:");
 			price = sc.nextFloat();
 			System.out.println("Color flor");
-			colour = sc.nextLine();
-			System.out.println("Quantitat d'abres:");
-			stock = sc.nextInt();
-			flowerList.add(new Flower(name, price, colour, stock));
-			System.out.println("Flor afegida!");
 			sc.nextLine();
-			
-		}else {
-			System.out.println("Introdueix el id de la flor o introdueix '0' per afegir una nova flor:");
-			flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: " + flower.getColour()));
-
-			id = sc.nextInt();
-			if(id == 0) {
-				System.out.println("Nom flor:");
-				name = sc.nextLine();
-				System.out.println("Preu flor:");
-				price = sc.nextFloat();
-				System.out.println("Color flor");
-				colour = sc.nextLine();
-				System.out.println("Quantitat d'abres:");
-				stock = sc.nextInt();
-				flowerList.add(new Flower(name, price, colour, stock));
-				System.out.println("Flor afegida!");
+			colour = sc.nextLine();
+			System.out.println("Quantitat flors:");
+			stock = sc.nextInt();
+			Flower flower = new Flower(name, price, colour, stock);
+			if(findFlower(flower) == null) {
+				flowerList.add(flower);
+				System.out.println("Flor afegida: " + flower);
 			}else {
-				System.out.println("Quantitat de flors:");
-				stock = sc.nextInt();
-				flowerList.get(id).setStock(flowerList.get(id).getStock() + stock);
+				System.out.println("Flor ja existent!");
+				int index = findIndex(flowerList, flower);
+				addStockFlower(flowerList.get(index), stock);
 			}
-		}
-		
+			sc.nextLine();
+
+	}
+	
+	public Flower findFlower(Flower flower) {
+
+		Optional<Flower> flowerFound = flowerList.stream()
+				.filter(f -> f.getName().equalsIgnoreCase(flower.getName()) && f.getColour().equals(flower.getColour()))
+				.findFirst();
+
+		return flowerFound.orElse(null);
 		
 	}
+	
+	public void addStockFlower(Flower flower, int stock) {
+
+		if (flower == null) {
+			System.out.println("La flor introduïda no existeix en la base de dades, registral com a nou");
+		} else {
+			flower.setStock(flower.getStock() + stock);
+			System.out.println("L'stock atualitzat es de: " + flower.getStock() + " de la flor: " + flower.getName()
+			+ " amb un color de: " + flower.getColour());
+		}
+	}
+	
+	public void showFlowers() {
+
+		System.out.println("Flors actuals a la base de dades:");
+
+		flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: "
+				+ flower.getColour() + "	Stock: " + flower.getStock()));
+
+	}
+	
+	
 	public void addDecor() {
 		
 		String name;
 		float price;
 		String material;
 		int stock;
-		int id;
 
-		if(decorList.size() < 1) {
 			System.out.println("Nom decoració:");
 			name = sc.nextLine();
 			System.out.println("Preu decoració:");
 			price = sc.nextFloat();
 			System.out.println("Material decoració");
+			sc.nextLine();
 			material = sc.nextLine();
 			System.out.println("Quantitat decoració:");
 			stock = sc.nextInt();
-			decorList.add(new Decor(name, price, material, stock));
-			System.out.println("decoració afegida!");
-			sc.nextLine();
-			
-		}else {
-			System.out.println("Introdueix el id de la flor o introdueix '0' per afegir una nova flor:");
-			decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Color: " + decor.getMaterial()));
-
-			id = sc.nextInt();
-			if(id == 0) {
-				System.out.println("Nom decoració:");
-				name = sc.nextLine();
-				System.out.println("Preu decoració:");
-				price = sc.nextFloat();
-				System.out.println("Material decoració");
-				material = sc.nextLine();
-				System.out.println("Quantitat decoració:");
-				stock = sc.nextInt();
-				decorList.add(new Decor(name, price, material, stock));
-				System.out.println("decoració afegida!");
+			Decor decor = new Decor(name, price, material, stock);
+			if(findDecor(decor) == null) {
+				decorList.add(decor);
+				System.out.println("Decoració afegida: " + decor);
 			}else {
-				System.out.println("Quantitat de flors:");
-				stock = sc.nextInt();
-				decorList.get(id).setStock(decorList.get(id).getStock() + stock);
+				System.out.println("Decoració ja existent!");
+				int index = findIndex(decorList, decor);
+				addStockDecor(decorList.get(index), stock);
 			}
-		}
-		
+			sc.nextLine();
+
+	}
+	
+	public Decor findDecor(Decor decor) {
+
+		Optional<Decor> decorFound = decorList.stream()
+				.filter(d-> d.getName().equalsIgnoreCase(decor.getName()) && d.getMaterial().equals(decor.getMaterial()))
+				.findFirst();
+
+		return decorFound.orElse(null);
 		
 	}
+	
+	public void addStockDecor(Decor decor, int stock) {
+
+		if (decor == null) {
+			System.out.println("La decoració introduïda no existeix en la base de dades, registral com a nou");
+		} else {
+			decor.setStock(decor.getStock() + stock);
+			System.out.println("L'stock atualitzat es de: " + decor.getStock() + " de la decoració: " + decor.getName()
+			+ " amb un color de: " + decor.getMaterial());
+		}
+	}
+	
+	public void showDecors() {
+
+		System.out.println("Decoracions actuals a la base de dades:");
+
+		decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Material: "
+				+ decor.getMaterial() + "	Stock: " + decor.getStock()));
+
+	}
+		
+
 	public void removeTree() throws NoStockException {
 		
 		int id;
 		int quantity;
 		
+		showTrees();
 		System.out.println("Introdueix el id de l'abre:");
-		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: " + tree.getHeight() + "	Stock: " + tree.getStock()));
 		id = sc.nextInt();
 		System.out.println("Quantitat:");
 		quantity = sc.nextInt();
@@ -279,8 +310,8 @@ public class Florist {
 		int id;
 		int quantity;
 		
+		showFlowers();
 		System.out.println("Introdueix el id de la flor:");
-		flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: " + flower.getColour() + "	Stock: " + flower.getStock()));
 		id = sc.nextInt();
 		System.out.println("Quantitat:");
 		quantity = sc.nextInt();
@@ -298,8 +329,8 @@ public class Florist {
 		int id;
 		int quantity;
 		
+		showDecors();
 		System.out.println("Introdueix el id de la flor:");
-		decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Material: " + decor.getMaterial() + "	Stock: " + decor.getStock()));
 		id = sc.nextInt();
 		System.out.println("Quantitat:");
 		quantity = sc.nextInt();

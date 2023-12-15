@@ -19,11 +19,7 @@ public class Tree extends Product {
 		this.height = height;
 	}
 
-	@Override
-	public String toString() {
-		return "Tree [height=" + height + ", name=" + name + ", price=" + price + ", id=" + id + "]";
-	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(height);
@@ -42,5 +38,11 @@ public class Tree extends Product {
 	}
 
 	
+	@Override
+	public String toString() {
+		return "Tree [height=" + height + ", name=" + name + ", price=" + price + ", id=" + id + "]";
+	}
+
+
 }
  

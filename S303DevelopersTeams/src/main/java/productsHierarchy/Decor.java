@@ -1,5 +1,7 @@
 package productsHierarchy;
 
+import java.util.Objects;
+
 public class Decor extends Product {
 
 	private String material;
@@ -15,6 +17,28 @@ public class Decor extends Product {
 
 	public void setMaterial(String material) {
 		this.material = material;
+	}
+
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(material);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Decor other = (Decor) obj;
+		return Objects.equals(material, other.material);
 	}
 
 	@Override
