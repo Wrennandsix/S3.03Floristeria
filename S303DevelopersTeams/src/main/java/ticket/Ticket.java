@@ -20,6 +20,12 @@ public class Ticket {
 		this.price = calculatePrice(productsList);
 	}
 
+	public Ticket(String name2, String productsList2, float price2, int id2) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public String getName() {
 		return name;
 	}

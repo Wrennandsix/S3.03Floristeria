@@ -1,6 +1,6 @@
 package Florist;
 
-import java.nio.file.spi.FileSystemProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +11,7 @@ import exceptions.NoStockException;
 import productsHierarchy.Decor;
 import input.Input;
 import productsHierarchy.Flower;
-import productsHierarchy.Product;
+
 import productsHierarchy.Tree;
 import ticket.Ticket;
 
@@ -40,6 +40,14 @@ public class Florist {
 	
 	
 	
+	public Florist(String name2, List<Tree> treeList2, List<Flower> flowerList2, List<Decor> decorList2,
+			List<Ticket> ticketsList2, int id2) {
+	}
+
+
+
+
+
 	public String getName() {
 		return name;
 	}
@@ -250,14 +258,6 @@ public class Florist {
 
 	}
 	
-	@Override
-	public String toString() {
-		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
-				+ decorList + ", ticketsList=" + ticketsList + ", id=" + id + "]";
-	}
-
-
-
 	public Decor findDecor(Decor decor) {
 
 		Optional<Decor> decorFound = decorList.stream()
@@ -383,5 +383,11 @@ public class Florist {
 		return 0f;
 	}
 	
+	@Override
+	public String toString() {
+		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
+				+ decorList + ", ticketsList=" + ticketsList + ", id=" + id + "]";
+	}
+
 	
 }

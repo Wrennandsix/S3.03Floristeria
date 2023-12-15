@@ -11,6 +11,7 @@ import productsHierarchy.Decor;
 import productsHierarchy.Flower;
 import productsHierarchy.Product;
 import productsHierarchy.Tree;
+import reader.Reader;
 import ticket.Ticket;
 import writter.Writter;
 public class App {
@@ -106,12 +107,17 @@ f.showOldBuys();
 		//System.out.println("preu total: " + f.valueTotal() + "€");
 		
 		
-		// escribe en un txt las flotisterias.
+		/* escribe en un txt las flotisterias.
 		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
 		allFlorist.add(f);
 		String absolutePath = new File("").getAbsolutePath();
 		String outputFile = absolutePath + ".dataBase.txt";
-		Writter.writeText(allFlorist, outputFile);
+		Writter.writeText(allFlorist, outputFile);*/
+		
+		String absolutePath = new File("").getAbsolutePath();
+		String inputFile = absolutePath + ".dataBase.txt";
+		ArrayList<Florist>florist = Reader.readText(inputFile);
+		System.out.println(florist);
 		
 		//simula una venta con la creacion de su ticket
 		ArrayList <Product> testSell = new ArrayList<Product>();		
