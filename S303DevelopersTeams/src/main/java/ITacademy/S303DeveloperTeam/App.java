@@ -92,18 +92,19 @@ f.showOldBuys();
 		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
 
 		//System.out.println("preu total: " + f.valueTotal() + "€");
+		
+		
+		// escribe en un txt las flotisterias.
 		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
 		allFlorist.add(f);
 		String absolutePath = new File("").getAbsolutePath();
 		String outputFile = absolutePath + ".dataBase.txt";
-		
 		Writter.writeText(allFlorist, outputFile);
 		
-		ArrayList <Product> testSell = new ArrayList<Product>();
-		
+		//simula una venta con la creacion de su ticket
+		ArrayList <Product> testSell = new ArrayList<Product>();		
 		testSell.add(f.getTreeList().get(0));
-		testSell.add(f.getTreeList().get(1));
-		
+		testSell.add(f.getTreeList().get(1));	
 		Ticket ticket = new Ticket(f.getName(),testSell);
 		
 		System.out.println(ticket);

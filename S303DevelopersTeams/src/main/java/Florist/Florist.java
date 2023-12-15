@@ -272,6 +272,14 @@ public class Florist {
 
 	}
 	
+	@Override
+	public String toString() {
+		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
+				+ decorList + ", ticketsList=" + ticketsList + ", id=" + id + "]";
+	}
+
+
+
 	public Decor findDecor(Decor decor) {
 
 		Optional<Decor> decorFound = decorList.stream()
@@ -389,7 +397,7 @@ public class Florist {
 		return treeValueTotal + flowerValueTotal + decorValueTotal;
 	}
 	public void showOldBuys() {
-		System.out.println("Historial de compres de la floristeria "+name);
+		System.out.println("Historial de compres de la floristeria: "+name);
 		ticketsList.forEach(ticket -> System.out.println(ticket.toString()));
 		
 	}
