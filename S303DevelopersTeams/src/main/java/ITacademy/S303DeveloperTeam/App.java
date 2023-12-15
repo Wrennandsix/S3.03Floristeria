@@ -32,13 +32,25 @@ public class App {
 
 			switch (opcio) {
 			case 1:
-				f.addTree();
+				try {
+					f.addTree();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 2:
-				f.addFlower();
+				try {
+					f.addFlower();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 3:
-				f.addDecor();
+				try {
+					f.addDecor();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 4:
 

@@ -110,7 +110,7 @@ public class Florist {
 	}
 	
 
-	public void addTree() {
+	public void addTree() throws Exception {
 
 		String name;
 		float price = 0;
@@ -119,22 +119,12 @@ public class Florist {
 
 		name = Input.readString("Introdueix el nom del arbre:");
 
-		try {
-			price = Input.readFloat("Introdueix el preu del arbre:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			height = Input.readFloat("Introdueix l' alçada de l'arbre");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			stock = Input.readInt("Introdueix la quantitat d'abres a afegir:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		price = Input.readFloat("Introdueix el preu del arbre:");
+
+		height = Input.readFloat("Introdueix l' alçada de l'arbre");
+
+		stock = Input.readInt("Introdueix la quantitat d'abres a afegir:");
+
 		Tree tree = new Tree(name, price, height, stock);
 		if (findTree(tree) == null) {
 			treeList.add(tree);
@@ -147,7 +137,7 @@ public class Florist {
 		sc.nextLine();
 
 	}
-	
+
 	public Tree findTree(Tree tree) {
 
 		Optional<Tree> treeFound = treeList.stream()
@@ -177,24 +167,18 @@ public class Florist {
 
 	}
 
-	public void addFlower() {
+	public void addFlower() throws Exception {
 
 		String name;
 		float price = 0;
 		String colour;
 		int stock = 0;
 		name = Input.readString("Introdueix el nom de la flor:");
-		try {
-			price = Input.readFloat("Introdueix el preu de la flor:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		price = Input.readFloat("Introdueix el preu de la flor:");
+
 		colour = Input.readString("Introdueix el color de la flor:");
-		try {
-			stock = Input.readInt("Introdueix la quantitat de flors a afegir:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		stock = Input.readInt("Introdueix la quantitat de flors a afegir:");
 
 		Flower flower = new Flower(name, price, colour, stock);
 		if (findFlower(flower) == null) {
@@ -239,36 +223,30 @@ public class Florist {
 
 	}
 	
-	
-	public void addDecor() {
-		
+	public void addDecor() throws Exception {
+
 		String name;
 		float price = 0;
 		String material;
 		int stock = 0;
 		name = Input.readString("Introdueix el nom de la decoració:");
-		try {
-			price = Input.readFloat("Introdueix el preu de la decoració:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		material = Input.readString("Introdueix el material de la decoració:");
-		try {
-			stock = Input.readInt("Introdueix la quantitat de objectes decoratius a afegir:");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-			Decor decor = new Decor(name, price, material, stock);
-			if(findDecor(decor) == null) {
-				decorList.add(decor);
-				System.out.println("Decoració afegida: " + decor);
-			}else {
-				System.out.println("Decoració ja existent!");
-				int index = findIndex(decorList, decor);
-				addStockDecor(decorList.get(index), stock);
-			}
-			sc.nextLine();
+		price = Input.readFloat("Introdueix el preu de la decoració:");
+
+		material = Input.readString("Introdueix el material de la decoració:");
+
+		stock = Input.readInt("Introdueix la quantitat de objectes decoratius a afegir:");
+
+		Decor decor = new Decor(name, price, material, stock);
+		if (findDecor(decor) == null) {
+			decorList.add(decor);
+			System.out.println("Decoració afegida: " + decor);
+		} else {
+			System.out.println("Decoració ja existent!");
+			int index = findIndex(decorList, decor);
+			addStockDecor(decorList.get(index), stock);
+		}
+		sc.nextLine();
 
 	}
 	
