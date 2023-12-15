@@ -17,43 +17,42 @@ public class App {
 	
 	public static void main(String[] args) {
 
-	
-		/*try {
-			f.removeTree();
-		} catch (NoStockException e) {
-			System.err.println(e.getMessage());
-		}*/
+		FloristUtils fu = new FloristUtils();
 		Florist f = createDataBase();
 		
-		int opcio;
+
+		f.addTicket();
+		f.addTicket();
+		
+		int choice;
 
 		do {
-			opcio = menu();
+			choice = menu();
 
-			switch (opcio) {
+			switch (choice) {
 			case 1:
+				fu.createFlorist();
+				break;
+			case 2:
 				try {
 					f.addTree();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				break;
-			case 2:
+			case 3:
 				try {
 					f.addFlower();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				break;
-			case 3:
+			case 4:
 				try {
 					f.addDecor();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				break;
-			case 4:
-
 				break;
 			case 5:
 				f.showTrees();
@@ -65,6 +64,15 @@ public class App {
 				f.showDecors();
 				break;
 			case 8:
+				
+				break;
+			case 9:
+
+				break;
+			case 10:
+
+				break;
+			case 11:
 f.showOldBuys();
 				break;
 			case 0:
@@ -74,7 +82,7 @@ f.showOldBuys();
 			default:
 				System.out.println("Introdueix un numero valid del menu!!.");
 			}
-		} while (opcio != 0);
+		} while (choice != 0);
 	}
 
 	public static int menu() {
@@ -93,7 +101,7 @@ f.showOldBuys();
 		
 		Florist f = new Florist("Floristeria 1");
 		
-		f.getTreeList().add(new Tree("arbre1", 33, 12, 1));
+		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
 		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
 		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
 		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
@@ -117,7 +125,7 @@ f.showOldBuys();
 		ArrayList <Product> testSell = new ArrayList<Product>();		
 		testSell.add(f.getTreeList().get(0));
 		testSell.add(f.getTreeList().get(1));	
-		Ticket ticket = new Ticket(f.getName(),testSell);
+		Ticket ticket = new Ticket(f.getName(), f/*,testSell*/);
 		
 		System.out.println(ticket);
 		

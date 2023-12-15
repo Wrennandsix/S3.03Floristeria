@@ -24,7 +24,7 @@ public class Florist {
 	private List<Tree> treeList;
 	private List<Flower> flowerList;
 	private List<Decor> decorList;
-	private List<Ticket> ticketsList;
+	private List<Ticket> ticketList;
 	private int id;
 	private static int nextId = 0;
 	
@@ -34,7 +34,7 @@ public class Florist {
 		this.treeList = new ArrayList<Tree>();
 		this.flowerList = new ArrayList<Flower>();
 		this.decorList = new ArrayList<Decor>();
-		this.ticketsList = new ArrayList<Ticket>();
+		this.ticketList = new ArrayList<Ticket>();
 		this.id = ++nextId;
 	}
 	
@@ -250,11 +250,6 @@ public class Florist {
 
 	}
 	
-	@Override
-	public String toString() {
-		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
-				+ decorList + ", ticketsList=" + ticketsList + ", id=" + id + "]";
-	}
 
 
 
@@ -289,62 +284,83 @@ public class Florist {
 	}
 		
 
-	public void removeTree() throws NoStockException {
+	public Tree withdrawTree() throws NoStockException, Exception {
 		
 		int id;
 		int quantity;
+		Tree tree;
 		
 		showTrees();
-		System.out.println("Introdueix el id de l'abre:");
-		id = sc.nextInt();
-		System.out.println("Quantitat:");
-		quantity = sc.nextInt();
 		
-		if((treeList.get(id).getStock() - quantity) < 0) {
+		id = Input.readInt("Introdueix el id de l'abre:");
+		
+		quantity = Input.readInt("Quantitat");
+		
+		if((treeList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((treeList.get(id).getStock() - quantity) == 0) {
-			treeList.remove(id);
+		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
+			tree = treeList.get(id -1);
+			treeList.remove(id -1);
+			//System.out.println(tree.getName() + treeList.size());
+			return tree;
 		}else {
-			treeList.get(id).setStock(treeList.get(id).getStock() - quantity);
+			tree = treeList.get(id- 1);
+			treeList.get(id -1).setStock(treeList.get(id -1).getStock() - quantity);
+			tree.setStock(quantity);
+			return tree;
 		}
 		
 	}
-	public void removeFlower() throws NoStockException {
+	public Flower withdrawFlower() throws NoStockException, Exception {
 		
 		int id;
 		int quantity;
+		Flower flower;
 		
 		showFlowers();
-		System.out.println("Introdueix el id de la flor:");
-		id = sc.nextInt();
-		System.out.println("Quantitat:");
-		quantity = sc.nextInt();
+		
+		id = Input.readInt("Introdueix el id de la flor:");
+		
+		quantity = Input.readInt("Quantitat");
 		
 		if((flowerList.get(id).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((flowerList.get(id).getStock() - quantity) == 0) {
+			flower = flowerList.get(id);
 			flowerList.remove(id);
+			return flower;
 		}else {
+			flower = flowerList.get(id);
 			flowerList.get(id).setStock(flowerList.get(id).getStock() - quantity);
+			flower.setStock(quantity);
+			return flower;
 		}
+		
+		
 	}
-	public void removeDecor() throws NoStockException {
+	public Decor withdrawDecor() throws NoStockException, Exception {
 		
 		int id;
 		int quantity;
+		Decor decor;
 		
 		showDecors();
-		System.out.println("Introdueix el id de la flor:");
-		id = sc.nextInt();
-		System.out.println("Quantitat:");
-		quantity = sc.nextInt();
+		
+		id = Input.readInt("Introdueix el id de la decoració:");
+		
+		quantity = Input.readInt("Quantitat");
 		
 		if((decorList.get(id).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((decorList.get(id).getStock() - quantity) == 0) {
+			decor = decorList.get(id);
 			decorList.remove(id);
+			return decor;
 		}else {
+			decor = decorList.get(id);
 			decorList.get(id).setStock(decorList.get(id).getStock() - quantity);
+			decor.setStock(quantity);
+			return decor;
 		}
 		
 	}
@@ -358,6 +374,21 @@ public class Florist {
 		System.out.println("\nDecoració:");
 		decorList.forEach(decor -> System.out.println(decor.toString()));
 	}
+	
+	public void addTicket() {
+		
+		Ticket ticket = new Ticket("TicketTest", this);
+		
+		try {
+			ticket.addProducts();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ticketList.add(ticket);
+	}
+	
+	
 	public float valueTotal() {
 		
 		float treeValueTotal = (float) treeList.stream()
@@ -376,12 +407,17 @@ public class Florist {
 	}
 	public void showOldBuys() {
 		System.out.println("Historial de compres de la floristeria: "+name);
-		ticketsList.forEach(ticket -> System.out.println(ticket.toString()));
+		ticketList.forEach(ticket -> System.out.println(ticket.toString()));
 		
 	}
 	public float totalProfit() {
 		return 0f;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
+				+ decorList + ", ticketsList=" + ticketList + ", id=" + id + "]";
+	}
+
 }
