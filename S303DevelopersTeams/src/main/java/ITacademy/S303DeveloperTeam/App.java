@@ -1,5 +1,7 @@
 package ITacademy.S303DeveloperTeam;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Florist.Florist;
@@ -7,8 +9,10 @@ import Florist.FloristUtils;
 import exceptions.NoStockException;
 import productsHierarchy.Decor;
 import productsHierarchy.Flower;
+import productsHierarchy.Product;
 import productsHierarchy.Tree;
-
+import ticket.Ticket;
+import writter.Writter;
 public class App {
 	
 	public static void main(String[] args) {
@@ -49,7 +53,7 @@ public class App {
 				f.showDecors();
 				break;
 			case 8:
-
+f.showOldBuys();
 				break;
 			case 0:
 				System.out.println("Estas sortint de l'aplicacio");
@@ -88,6 +92,21 @@ public class App {
 		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
 
 		//System.out.println("preu total: " + f.valueTotal() + "€");
+		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
+		allFlorist.add(f);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + ".dataBase.txt";
+		
+		Writter.writeText(allFlorist, outputFile);
+		
+		ArrayList <Product> testSell = new ArrayList<Product>();
+		
+		testSell.add(f.getTreeList().get(0));
+		testSell.add(f.getTreeList().get(1));
+		
+		Ticket ticket = new Ticket(f.getName(),testSell);
+		
+		System.out.println(ticket);
 		
 		return f;
 

@@ -8,16 +8,16 @@ import productsHierarchy.Product;
 public class Ticket {
 	
 	private String name;
-	private List<Product>productsList;
-	private float Price;
-	int id;
+	private ArrayList<Product> productsList = new ArrayList<Product>();;
+	private float price = 0;
+	private int id;
 	private static int nextId = 0;
 	
-	public Ticket(String name, List<Product> productsList, float price, int id) {
+	public Ticket(String name,ArrayList<Product> productsList) {
+		this.productsList = productsList;
 		this.name = name;
-		this.productsList = new ArrayList<Product>();
-		Price = price;
-		this.id = nextId++;
+		this.id = ++nextId;
+		this.price = calculatePrice(productsList);
 	}
 
 	public String getName() {
@@ -32,16 +32,17 @@ public class Ticket {
 		return productsList;
 	}
 
-	public void setProductsList(List<Product> productsList) {
+	public void setProductsList(ArrayList<Product> productsList) {
 		this.productsList = productsList;
+		
 	}
 
 	public float getPrice() {
-		return Price;
+		return price;
 	}
 
 	public void setPrice(float price) {
-		Price = price;
+		this.price = price;
 	}
 
 	public int getId() {
@@ -54,7 +55,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [name=" + name + ", productsList=" + productsList + ", Price=" + Price + ", id=" + id + "]";
+		return "Ticket [name=" + name + ", productsList=" + productsList + ", Price=" + price + ", id=" + id + "]";
 	}
 
 	public float calculatePrice(ArrayList<Product> productsList) {
