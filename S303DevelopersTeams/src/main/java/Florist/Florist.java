@@ -1,17 +1,16 @@
 package Florist;
 
-import java.nio.file.spi.FileSystemProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Scanner;
 import java.util.stream.IntStream;
-
 import exceptions.NoStockException;
 import productsHierarchy.Decor;
 import input.Input;
 import productsHierarchy.Flower;
-import productsHierarchy.Product;
 import productsHierarchy.Tree;
 import ticket.Ticket;
 
@@ -108,6 +107,31 @@ public class Florist {
 		
 		return index.orElse(-1);
 	}
+	public int findTreeIndex(List<Tree> treeList, int id) {
+		
+	    OptionalInt index = IntStream.range(0, treeList.size())
+	            .filter(i -> treeList.get(i).getId() == id)
+	            .findFirst();
+
+	    return index.orElse(-1);
+	}
+	public int findFlowerIndex(List<Flower> flowerList, int id) {
+		
+	    OptionalInt index = IntStream.range(0, flowerList.size())
+	            .filter(i -> flowerList.get(i).getId() == id)
+	            .findFirst();
+
+	    return index.orElse(-1);
+	}
+	public int findDecorIndex(List<Decor> decorList, int id) {
+		
+	    OptionalInt index = IntStream.range(0, decorList.size())
+	            .filter(i -> decorList.get(i).getId() == id)
+	            .findFirst();
+
+	    return index.orElse(-1);
+	}
+
 	
 
 	public void addTree() throws Exception {
@@ -160,7 +184,7 @@ public class Florist {
 	
 	public void showTrees() {
 
-		System.out.println("Arbres actuals a la base de dades:");
+		System.out.println("Arbres actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
 		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
 				+ tree.getHeight() + "	Stock: " + tree.getStock()));
@@ -173,7 +197,9 @@ public class Florist {
 		float price = 0;
 		String colour;
 		int stock = 0;
+		
 		name = Input.readString("Introdueix el nom de la flor:");
+		
 		price = Input.readFloat("Introdueix el preu de la flor:");
 
 		colour = Input.readString("Introdueix el color de la flor:");
@@ -216,7 +242,7 @@ public class Florist {
 	
 	public void showFlowers() {
 
-		System.out.println("Flors actuals a la base de dades:");
+		System.out.println("Flors actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
 		flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: "
 				+ flower.getColour() + "	Stock: " + flower.getStock()));
@@ -252,7 +278,6 @@ public class Florist {
 	
 
 
-
 	public Decor findDecor(Decor decor) {
 
 		Optional<Decor> decorFound = decorList.stream()
@@ -276,13 +301,67 @@ public class Florist {
 	
 	public void showDecors() {
 
-		System.out.println("Decoracions actuals a la base de dades:");
+		System.out.println("Decoracions actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
 		decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Material: "
 				+ decor.getMaterial() + "	Stock: " + decor.getStock()));
 
 	}
-		
+
+	public void removeTree() throws Exception {
+
+		showTrees();
+		if (treeList.isEmpty()) {
+			System.out.println("La base de dades esta buida!.");
+		} else {
+
+			id = Input.readInt("Introdueix el id de l'abre que vols eliminar  de la base de dades:");
+
+			int indexFound = findTreeIndex(treeList, id);
+
+			if (id == treeList.get(indexFound).getId()) {
+				System.out.println(
+						"Arbre: " + treeList.get(indexFound).toString() + " ha sigut eliminat de la base de dades.");
+				treeList.remove(indexFound);
+			}
+		}
+	}
+
+	public void removeFlower() throws Exception {
+
+		showFlowers();
+		if (flowerList.isEmpty()) {
+			System.out.println("La base de dades esta buida!.");
+		} else {
+			id = Input.readInt("Introdueix el id de la flor que vols eliminar  de la base de dades:");
+
+			int indexFound = findFlowerIndex(flowerList, id);
+			if (id == flowerList.get(indexFound).getId()) {
+				System.out.println(
+						"Flor: " + flowerList.get(indexFound).toString() + " ha sigut eliminada de la base de dades.");
+				flowerList.remove(indexFound);
+			}
+		}
+	}
+
+	public void removeDecor() throws Exception {
+
+		showDecors();
+		if (decorList.isEmpty()) {
+			System.out.println("La base de dades esta buida!.");
+		} else {
+
+			id = Input.readInt("Introdueix el id de la decoració que vols eliminar  de la base de dades:");
+
+			int indexFound = findDecorIndex(decorList, id);
+
+			if (id == decorList.get(indexFound).getId()) {
+				System.out.println("Decoració: " + decorList.get(indexFound).toString()
+						+ " ha sigut eliminat de la base de dades.");
+				decorList.remove(indexFound);
+			}
+		}
+	}
 
 	public Tree withdrawTree() throws NoStockException, Exception {
 		
@@ -296,7 +375,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((treeList.get(id -1).getStock() - quantity) < 0) {
+		if((treeList.get(id -1).getStock() - quantity) <= 0) {
 			throw new NoStockException();
 		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
 			tree = new Tree(treeList.get(id- 1));
@@ -322,7 +401,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((flowerList.get(id -1).getStock() - quantity) < 0) {
+		if((flowerList.get(id -1).getStock() - quantity) <= 0) {
 			throw new NoStockException();
 		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
 			flower = new Flower(flowerList.get(id -1));
@@ -349,7 +428,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((decorList.get(id -1).getStock() - quantity) < 0) {
+		if((decorList.get(id -1).getStock() - quantity) <= 0) {
 			throw new NoStockException();
 		}else if((decorList.get(id-1).getStock() - quantity) == 0) {
 			decor = new Decor(decorList.get(id -1));
@@ -387,30 +466,38 @@ public class Florist {
 		ticketList.add(ticket);
 	}
 	
-	
+	public float valueTrees() {
+
+		return (float) treeList.stream().mapToDouble(tree -> tree.getPrice() * tree.getStock()).sum();
+	}
+
+	public float valueFlowers() {
+
+		return (float) flowerList.stream().mapToDouble(flower -> flower.getPrice() * flower.getStock()).sum();
+	}
+
+	public float valueDecors() {
+
+		return (float) decorList.stream().mapToDouble(Decors -> Decors.getPrice() * Decors.getStock()).sum();
+	}
+
 	public float valueTotal() {
-		
-		float treeValueTotal = (float) treeList.stream()
-                .mapToDouble(tree -> tree.getPrice() * tree.getStock())
-                .sum();
-		
-		float flowerValueTotal = (float) flowerList.stream()
-                .mapToDouble(flower -> flower.getPrice() * flower.getStock())
-                .sum();
-		
-		float decorValueTotal = (float) decorList.stream()
-                .mapToDouble(decor -> decor.getPrice() * decor.getStock())
-                .sum();
+
+		float treeValueTotal = valueTrees();
+		float flowerValueTotal = valueFlowers();
+		float decorValueTotal = valueDecors();
 		
 		return treeValueTotal + flowerValueTotal + decorValueTotal;
 	}
+
 	public void showOldBuys() {
-		System.out.println("Historial de compres de la floristeria: "+name);
+		System.out.println("Historial de compres de la floristeria: " + name);
 		ticketList.forEach(ticket -> System.out.println(ticket.toString()));
-		
+
 	}
+
 	public float totalProfit() {
-		
+
 		float valueTotal;
 	
 		valueTotal = (float) ticketList.stream()

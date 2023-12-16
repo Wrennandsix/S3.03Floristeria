@@ -21,13 +21,11 @@ public class App {
 		Florist f = createDataBase();
 		
 		
-		//addTicket(); hace la venta
-		System.out.println(f.totalProfit());
-		f.addTicket();
-		System.out.println(f.totalProfit());
+//		//addTicket(); hace la venta
+//		System.out.println(f.totalProfit());
+//		f.addTicket();
+//		System.out.println(f.totalProfit());
 		
-		
-
 		
 		int choice;
 
@@ -49,6 +47,7 @@ public class App {
 				try {
 					f.addFlower();
 				} catch (Exception e) {
+				
 					e.printStackTrace();
 				}
 				break;
@@ -60,16 +59,31 @@ public class App {
 				}
 				break;
 			case 5:
-				f.showTrees();
+				try {
+					f.removeTree();
+				} catch (Exception e) {
+					System.out.println("L'arbre amb aquest id no existeix actualment a la base de dades");
+					e.printStackTrace();
+				}
 				break;
 			case 6:
-				f.showFlowers();
+				try {
+					f.removeFlower();
+				} catch (Exception e) {
+					System.out.println("La flor amb aquest id no existeix actualment a la base de dades");
+					e.printStackTrace();
+				}
 				break;
 			case 7:
-				f.showDecors();
+				try {
+					f.removeDecor();
+				} catch (Exception e) {
+					System.out.println("La decoració amb aquest id no existeix actualment a la base de dades");
+					e.printStackTrace();
+				}
 				break;
 			case 8:
-				
+				f.addTicket();
 				break;
 			case 9:
 
@@ -78,7 +92,7 @@ public class App {
 
 				break;
 			case 11:
-f.showOldBuys();
+         f.showOldBuys();
 				break;
 			case 0:
 				System.out.println("Estas sortint de l'aplicacio");
@@ -96,9 +110,15 @@ f.showOldBuys();
 		
 		int option = 0;
 		System.out.println("*** Welcome to the florist manager ***\n"
-				+ "1- Afegir un arbre a la base de dades.\n"
-				+ "2- Afegir una flor a la base de dades.\n"
-				+ "3- Afegir una flor a la base de dades.\n");
+				+ "1- Afegir una floristeria a la base de dades.\n"
+				+ "2- Afegir un arbre a la base de dades.\n"
+				+ "3- Afegir una flor a la base de dades.\n"
+				+ "4- Afegir una decoració a la base de dades.\n"
+				+ "5- Retirar un arbre a la base de dades.\n"
+				+ "6- Retirar una flor a la base de dades.\n"
+				+ "7- Retirar una decoració a la base de dades.\n"
+				+ "8- Generar un ticket de venda.\n"
+				+ "0- Sortir de l'aplicació\n");
 		option = sc.nextInt();	
 		return option;
 	}

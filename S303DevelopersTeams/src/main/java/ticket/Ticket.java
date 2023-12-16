@@ -72,16 +72,29 @@ public class Ticket {
 
 			switch (opcio) {
 			case 1:
-				productsList.add(florist.withdrawTree());
+				try {
+					productsList.add(florist.withdrawTree());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 2:
-				productsList.add(florist.withdrawFlower());
+				try {
+					productsList.add(florist.withdrawFlower());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 3:
-				productsList.add(florist.withdrawDecor());
+				try {
+					productsList.add(florist.withdrawDecor());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				break;
 			case 0:
-				System.out.println("Estas sortint de l'aplicacio");
+				System.out.println("Gracies per la compra, productes comprats:"+ productsList);
+		
 				break;
 
 			default:
