@@ -20,9 +20,14 @@ public class App {
 		FloristUtils fu = new FloristUtils();
 		Florist f = createDataBase();
 		
+		
+		//addTicket(); hace la venta
+		System.out.println(f.totalProfit());
+		f.addTicket();
+		System.out.println(f.totalProfit());
+		
+		
 
-		f.addTicket();
-		f.addTicket();
 		
 		int choice;
 

@@ -5,10 +5,19 @@ import java.util.Objects;
 public class Decor extends Product {
 
 	private String material;
+	private int id;
+	private static int nextId = 0;
 
 	public Decor(String name, float price, String material , int stock) {
 		super(name, price, stock);
 		this.material = material;
+		this.id = ++nextId;
+	}
+	
+	public Decor(Decor decor) {
+		super(decor.getName(), decor.getPrice(), decor.getStock());
+		this.material = decor.getMaterial();
+
 	}
 
 	public String getMaterial() {
@@ -18,8 +27,10 @@ public class Decor extends Product {
 	public void setMaterial(String material) {
 		this.material = material;
 	}
-
 	
+	public int getId() {
+		return id;
+	}
 	
 	@Override
 	public int hashCode() {

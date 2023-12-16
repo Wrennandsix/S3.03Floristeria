@@ -299,13 +299,12 @@ public class Florist {
 		if((treeList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
-			tree = treeList.get(id -1);
+			tree = new Tree(treeList.get(id- 1));
 			treeList.remove(id -1);
-			//System.out.println(tree.getName() + treeList.size());
 			return tree;
 		}else {
-			tree = treeList.get(id- 1);
 			treeList.get(id -1).setStock(treeList.get(id -1).getStock() - quantity);
+			tree = new Tree(treeList.get(id- 1));
 			tree.setStock(quantity);
 			return tree;
 		}
@@ -323,15 +322,15 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((flowerList.get(id).getStock() - quantity) < 0) {
+		if((flowerList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((flowerList.get(id).getStock() - quantity) == 0) {
-			flower = flowerList.get(id);
-			flowerList.remove(id);
+		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
+			flower = new Flower(flowerList.get(id -1));
+			flowerList.remove(id -1);
 			return flower;
 		}else {
-			flower = flowerList.get(id);
-			flowerList.get(id).setStock(flowerList.get(id).getStock() - quantity);
+			flower = new Flower(flowerList.get(id -1));
+			flowerList.get(id -1).setStock(flowerList.get(id -1).getStock() - quantity);
 			flower.setStock(quantity);
 			return flower;
 		}
@@ -350,15 +349,15 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((decorList.get(id).getStock() - quantity) < 0) {
+		if((decorList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((decorList.get(id).getStock() - quantity) == 0) {
-			decor = decorList.get(id);
-			decorList.remove(id);
+		}else if((decorList.get(id-1).getStock() - quantity) == 0) {
+			decor = new Decor(decorList.get(id -1));
+			decorList.remove(id -1);
 			return decor;
 		}else {
-			decor = decorList.get(id);
-			decorList.get(id).setStock(decorList.get(id).getStock() - quantity);
+			decor = new Decor(decorList.get(id -1));
+			decorList.get(id -1).setStock(decorList.get(id -1).getStock() - quantity);
 			decor.setStock(quantity);
 			return decor;
 		}
@@ -377,7 +376,7 @@ public class Florist {
 	
 	public void addTicket() {
 		
-		Ticket ticket = new Ticket("TicketTest", this);
+		Ticket ticket = new Ticket("Ticket" + this.name, this);
 		
 		try {
 			ticket.addProducts();
@@ -411,7 +410,14 @@ public class Florist {
 		
 	}
 	public float totalProfit() {
-		return 0f;
+		
+		float valueTotal;
+	
+		valueTotal = (float) ticketList.stream()
+		.mapToDouble(t -> t.calculatePrice())
+		.sum();
+		
+		return valueTotal;
 	}
 	
 	@Override

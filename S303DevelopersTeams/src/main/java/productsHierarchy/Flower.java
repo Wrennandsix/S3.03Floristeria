@@ -5,10 +5,19 @@ import java.util.Objects;
 public class Flower extends Product {
 
 	private String colour;
-
+	private int id;
+	private static int nextId = 0;
+	
 	public Flower(String name, float price, String colour,int stock) {
 		super(name, price, stock);
 		this.colour = colour;
+		this.id = ++nextId;
+	}
+	
+	public Flower(Flower flower) {
+		super(flower.getName(), flower.getPrice(), flower.getStock());
+		this.colour = flower.getColour();
+
 	}
 
 	public String getColour() {
@@ -20,7 +29,10 @@ public class Flower extends Product {
 	}
 
 	
-	
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

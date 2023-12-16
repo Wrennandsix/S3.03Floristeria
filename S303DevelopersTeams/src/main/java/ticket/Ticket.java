@@ -6,6 +6,7 @@ import java.util.List;
 import Florist.Florist;
 import input.Input;
 import productsHierarchy.Product;
+import productsHierarchy.Tree;
 
 public class Ticket {
 	
@@ -21,7 +22,7 @@ public class Ticket {
 		this.name = name;
 		this.florist = florist;
 		this.id = ++nextId;
-		this.price = calculatePrice(productsList);
+		this.price = calculatePrice();
 	}
 
 	public String getName() {
@@ -63,7 +64,7 @@ public class Ticket {
 		int opcio;
 
 		do {
-			opcio = Input.readInt("Menu afegir productes:"
+			opcio = Input.readInt("Afegir productes al ticket:"
 					+ "\n1- Agegir arbre."
 					+ "\n2- Afegir flor."
 					+ "\n3- Afegir decoració."
@@ -71,13 +72,13 @@ public class Ticket {
 
 			switch (opcio) {
 			case 1:
-				florist.withdrawTree();
+				productsList.add(florist.withdrawTree());
 				break;
 			case 2:
-				florist.withdrawFlower();
+				productsList.add(florist.withdrawFlower());
 				break;
 			case 3:
-				florist.withdrawDecor();
+				productsList.add(florist.withdrawDecor());
 				break;
 			case 0:
 				System.out.println("Estas sortint de l'aplicacio");
@@ -92,7 +93,7 @@ public class Ticket {
 
 
 
-	public float calculatePrice(ArrayList<Product> productsList) {
+	public float calculatePrice() {
 
 		return (float) productsList.stream()
 				.mapToDouble(Product::getPrice)

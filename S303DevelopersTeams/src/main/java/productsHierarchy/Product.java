@@ -6,16 +6,13 @@ public abstract class Product {
 
 	protected String name;
 	protected float price;
-	protected int id;
 	protected int stock;
-	private static int nextId = 0;
-	
 
 	public Product(String name, float price, int stock) {
 		this.name = name;
 		this.price = price;
 		this.stock = stock;
-		this.id = ++nextId;
+		
 	}
 
 	public int getStock() {
@@ -43,10 +40,6 @@ public abstract class Product {
 	}
 	
 	
-
-	public int getId() {
-		return id;
-	}
 
 	@Override
 	public int hashCode() {
