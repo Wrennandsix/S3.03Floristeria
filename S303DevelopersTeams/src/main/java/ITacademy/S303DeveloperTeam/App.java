@@ -86,13 +86,19 @@ public class App {
 				f.addTicket();
 				break;
 			case 9:
-
+				f.printStock();
 				break;
 			case 10:
-
+				f.printStockQuantities();
 				break;
 			case 11:
-         f.showOldBuys();
+				f.printValueTotal();
+				break;
+			case 12:
+				f.showOldBuys();
+				break;
+			case 13:
+				f.printTotalProfit();
 				break;
 			case 0:
 				System.out.println("Estas sortint de l'aplicacio");
@@ -118,6 +124,11 @@ public class App {
 				+ "6- Retirar una flor a la base de dades.\n"
 				+ "7- Retirar una decoració a la base de dades.\n"
 				+ "8- Generar un ticket de venda.\n"
+				+ "9- Mostrar l'stock total de la floristeria.\n"
+				+ "10- Mostrar l'stock total de la floristeria amb les quantitats.\n"
+				+ "11- Mostrar el valor total de l'stock de la floristeria.\n"
+				+ "12- Mostrar totes les compres antigues de la floristeria.\n"
+				+ "13- Mostrar el total guanyat amb totes les vendes de la floristeria.\n"
 				+ "0- Sortir de l'aplicació\n");
 		option = sc.nextInt();	
 		return option;
@@ -139,12 +150,12 @@ public class App {
 		//System.out.println("preu total: " + f.valueTotal() + "€");
 		
 		
-		// escribe en un txt las flotisterias.
-		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
-		allFlorist.add(f);
-		String absolutePath = new File("").getAbsolutePath();
-		String outputFile = absolutePath + ".dataBase.txt";
-		Writter.writeText(allFlorist, outputFile);
+//		// escribe en un txt las flotisterias.
+//		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
+//		allFlorist.add(f);
+//		String absolutePath = new File("").getAbsolutePath();
+//		String outputFile = absolutePath + ".dataBase.txt";
+//		Writter.writeText(allFlorist, outputFile);
 		
 		//simula una venta con la creacion de su ticket
 		ArrayList <Product> testSell = new ArrayList<Product>();		

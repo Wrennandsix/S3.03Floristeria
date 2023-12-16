@@ -375,7 +375,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((treeList.get(id -1).getStock() - quantity) <= 0) {
+		if((treeList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
 			tree = new Tree(treeList.get(id- 1));
@@ -401,7 +401,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((flowerList.get(id -1).getStock() - quantity) <= 0) {
+		if((flowerList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
 			flower = new Flower(flowerList.get(id -1));
@@ -428,7 +428,7 @@ public class Florist {
 		
 		quantity = Input.readInt("Quantitat");
 		
-		if((decorList.get(id -1).getStock() - quantity) <= 0) {
+		if((decorList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
 		}else if((decorList.get(id-1).getStock() - quantity) == 0) {
 			decor = new Decor(decorList.get(id -1));
@@ -452,7 +452,24 @@ public class Florist {
 		System.out.println("\nDecoració:");
 		decorList.forEach(decor -> System.out.println(decor.toString()));
 	}
-	
+
+	public void printStockQuantities() {
+		System.out.println("Abres:");
+		treeList.forEach(tree -> {
+			System.out.println(tree.toString() + " Stock:" + tree.getStock());
+		});
+
+		System.out.println("\nFlors:");
+		flowerList.forEach(flower -> {
+			System.out.println(flower.toString() + " Stock:" + flower.getStock());
+		});
+
+		System.out.println("\nDecoració:");
+		decorList.forEach(decor -> {
+			System.out.println(decor.toString() + " Stock:" + decor.getStock());
+		});
+	}
+
 	public void addTicket() {
 		
 		Ticket ticket = new Ticket("Ticket" + this.name, this);
@@ -486,8 +503,13 @@ public class Florist {
 		float treeValueTotal = valueTrees();
 		float flowerValueTotal = valueFlowers();
 		float decorValueTotal = valueDecors();
-		
+
 		return treeValueTotal + flowerValueTotal + decorValueTotal;
+	}
+
+	public void printValueTotal() {
+		System.out.println("El valor total del stock de la floristeria es de: " + valueTotal() + " Euros");
+
 	}
 
 	public void showOldBuys() {
@@ -499,14 +521,17 @@ public class Florist {
 	public float totalProfit() {
 
 		float valueTotal;
-	
-		valueTotal = (float) ticketList.stream()
-		.mapToDouble(t -> t.calculatePrice())
-		.sum();
-		
+
+		valueTotal = (float) ticketList.stream().mapToDouble(t -> t.calculatePrice()).sum();
+
 		return valueTotal;
 	}
-	
+
+	public void printTotalProfit() {
+		System.out.println("El valor total de les vendes de la floristeria es de: " + totalProfit() + " Euros");
+
+	}
+
 	@Override
 	public String toString() {
 		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
