@@ -56,22 +56,25 @@ public class FloristUtils {
 	}
 
 	public Florist accesFlorist() throws Exception {
+	 
+	    
+	    Florist florist = null;
 
-		showFlorists();
+	    do {
+	    	showFlorists();
+	        int id = requestId();
+	        int index = findFlorist(id);
 
-		int id = requestId();
-		int index = findFlorist(id);
-		Florist florist = null;
+	        if (index == -1) {
+	            System.out.println("La floristeria amb id: " + id + ", a la que intentas accedir no existeix en la base de dades.");
+	        } else {
+	            florist = florists.get(index);
+	        }
+	    } while (florist == null);
 
-		if (index == -1) {
-			System.out.println("La floristeria a la que intentes accedir no existeix en la base de dades");
-		} else {
-			florist = florists.get(index);
-
-		}
-		return florist;
-
+	    return florist;
 	}
+
 	public static void  createDataBase() {
 		
 		Florist f = new Florist("Floristeria 1");
@@ -87,25 +90,6 @@ public class FloristUtils {
 		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
 
 	    florists.add(f);
-
-
-//		//System.out.println("preu total: " + f.valueTotal() + "€");
-//		
-//		
-////		// escribe en un txt las flotisterias.
-////		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
-////		allFlorist.add(f);
-////		String absolutePath = new File("").getAbsolutePath();
-////		String outputFile = absolutePath + ".dataBase.txt";
-////		Writter.writeText(allFlorist, outputFile);
-//		
-//		//simula una venta con la creacion de su ticket
-//		ArrayList <Product> testSell = new ArrayList<Product>();		
-//		testSell.add(f.getTreeList().get(0));
-//		testSell.add(f.getTreeList().get(1));	
-//		Ticket ticket = new Ticket(f.getName(), f/*,testSell*/);
-//		
-//		System.out.println(ticket);
 
 		
 	}

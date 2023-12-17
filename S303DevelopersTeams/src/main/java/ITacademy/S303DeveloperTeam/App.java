@@ -104,7 +104,7 @@ public class App {
 		
 		int option = 0;
 		try {
-			option = Input.readInt("*** Welcome to the florist manager ***\n"
+			option = Input.readInt("*** Welcome to the florist app ***\n"
 					+ "2- Afegir un arbre a la base de dades.\n"
 					+ "3- Afegir una flor a la base de dades.\n"
 					+ "4- Afegir una decoració a la base de dades.\n"
