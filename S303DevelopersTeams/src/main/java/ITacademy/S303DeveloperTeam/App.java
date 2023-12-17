@@ -117,7 +117,7 @@ public class App {
 					+ "11- Mostrar el valor total de l'stock de la floristeria.\n"
 					+ "12- Mostrar totes les compres antigues de la floristeria.\n"
 					+ "13- Mostrar el total guanyat amb totes les vendes de la floristeria.\n"
-					+ "0- Sortir de l'aplicació\n");
+					+ "0- Sortir de l'aplicació");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

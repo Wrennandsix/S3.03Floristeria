@@ -43,9 +43,9 @@ public static int menu() {
 		
 	int option = 0;
 	try {
-		option = Input.readInt("*** Welcome to the florist manager ***\n"
+		option = Input.readInt("*** Welcome florist acces ***\n"
 				+ "1- Afegir una floristeria a la base de dades.\n"
-				+ "2- Accedir a una floristeria existent a la base de dades\n");
+				+ "2- Accedir a una floristeria existent a la base de dades");
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
