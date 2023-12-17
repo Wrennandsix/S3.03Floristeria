@@ -32,22 +32,28 @@ public class FloristUtils {
 
 	public int requestId() throws Exception {
 
-		int id = Input.readInt("Introdueix el id de la floristeria");
+		int id = Input.readInt("Introdueix el id de la floristeria a la que vols accedir.");
+
+		return id;
+	}
+	public int requestIdAdd() throws Exception {
+
+		int id = Input.readInt("Introdueix el id de la floristeria per comprobar si ja existeix a la base de dades.");
 
 		return id;
 	}
 
 	public void addFlorist() throws Exception {
 		showFlorists();
-
-		int id = requestId();
+		int id = requestIdAdd();
+		
 		int index = findFlorist(id);
 
 		if (index == -1) {
 			String name = Input.readString("Introdueix el nom de la floristeria que vols afegir a la base de dades");
 			Florist florist = new Florist(name);
 			florists.add(florist);
-			System.out.println("Floristeria afegida correctament a la base de dades\n " + florist.toString());
+			System.out.println("Floristeria amb nom: "+florist.getName()+" y id: "+florist.getId()+" afegida correctament a la base de dades.");
 
 		} else {
 			System.out.println("La floristeria que intentes afegir a la base de dades ja existeix");
