@@ -1,30 +1,23 @@
 package ITacademy.S303DeveloperTeam;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Scanner;
 
+import java.util.ArrayList;
 import Florist.Florist;
-import Florist.FloristUtils;
-import exceptions.NoStockException;
+import firstMenu.FirstMenu;
+import input.Input;
 import productsHierarchy.Decor;
 import productsHierarchy.Flower;
 import productsHierarchy.Product;
 import productsHierarchy.Tree;
 import ticket.Ticket;
-import writter.Writter;
+
 public class App {
 	
 	public static void main(String[] args) {
 
-		FloristUtils fu = new FloristUtils();
-		Florist f = createDataBase();
 		
-		
-//		//addTicket(); hace la venta
-//		System.out.println(f.totalProfit());
-//		f.addTicket();
-//		System.out.println(f.totalProfit());
+		//Florist f = createDataBase();
+		Florist f = FirstMenu.firstMenu();
 		
 		
 		int choice;
@@ -33,9 +26,6 @@ public class App {
 			choice = menu();
 
 			switch (choice) {
-			case 1:
-				fu.createFlorist();
-				break;
 			case 2:
 				try {
 					f.addTree();
@@ -112,25 +102,26 @@ public class App {
 
 	public static int menu() {
 		
-		Scanner sc = new Scanner(System.in);
-		
 		int option = 0;
-		System.out.println("*** Welcome to the florist manager ***\n"
-				+ "1- Afegir una floristeria a la base de dades.\n"
-				+ "2- Afegir un arbre a la base de dades.\n"
-				+ "3- Afegir una flor a la base de dades.\n"
-				+ "4- Afegir una decoració a la base de dades.\n"
-				+ "5- Retirar un arbre a la base de dades.\n"
-				+ "6- Retirar una flor a la base de dades.\n"
-				+ "7- Retirar una decoració a la base de dades.\n"
-				+ "8- Generar un ticket de venda.\n"
-				+ "9- Mostrar l'stock total de la floristeria.\n"
-				+ "10- Mostrar l'stock total de la floristeria amb les quantitats.\n"
-				+ "11- Mostrar el valor total de l'stock de la floristeria.\n"
-				+ "12- Mostrar totes les compres antigues de la floristeria.\n"
-				+ "13- Mostrar el total guanyat amb totes les vendes de la floristeria.\n"
-				+ "0- Sortir de l'aplicació\n");
-		option = sc.nextInt();	
+		try {
+			option = Input.readInt("*** Welcome to the florist manager ***\n"
+					+ "2- Afegir un arbre a la base de dades.\n"
+					+ "3- Afegir una flor a la base de dades.\n"
+					+ "4- Afegir una decoració a la base de dades.\n"
+					+ "5- Retirar un arbre a la base de dades.\n"
+					+ "6- Retirar una flor a la base de dades.\n"
+					+ "7- Retirar una decoració a la base de dades.\n"
+					+ "8- Generar un ticket de venda.\n"
+					+ "9- Mostrar l'stock total de la floristeria.\n"
+					+ "10- Mostrar l'stock total de la floristeria amb les quantitats.\n"
+					+ "11- Mostrar el valor total de l'stock de la floristeria.\n"
+					+ "12- Mostrar totes les compres antigues de la floristeria.\n"
+					+ "13- Mostrar el total guanyat amb totes les vendes de la floristeria.\n"
+					+ "0- Sortir de l'aplicació\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return option;
 	}
 	public static Florist  createDataBase() {

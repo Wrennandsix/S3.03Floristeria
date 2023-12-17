@@ -2,11 +2,10 @@ package ticket;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import Florist.Florist;
 import input.Input;
 import productsHierarchy.Product;
-import productsHierarchy.Tree;
+
 
 public class Ticket {
 	
@@ -17,12 +16,9 @@ public class Ticket {
 	private int id;
 	private static int nextId = 0;
 	
-	public Ticket(String name, Florist florist/*, ArrayList<Product> productsLis*/) {
-		this.productsList = productsList;
-		this.name = name;
+	public Ticket(String name, Florist florist) {
 		this.florist = florist;
 		this.id = ++nextId;
-		this.price = calculatePrice();
 	}
 
 	public String getName() {
@@ -108,9 +104,7 @@ public class Ticket {
 
 	public float calculatePrice() {
 
-		return (float) productsList.stream()
-				.mapToDouble(Product::getPrice)
-				.sum();
+		return (float) productsList.stream().mapToDouble(p -> p.getPrice() * p.getStock()).sum();
 	}
 	
 	@Override

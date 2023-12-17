@@ -67,36 +67,6 @@ public class Florist {
 		return id;
 	}
 
-	/*public int requestTree() {
-
-		int id;
-
-		System.out.println("Introdueix el id del arbre existent a la base de dades al cual vols afegir stock.");
-		id = sc.nextInt();
-		return id;
-
-	}
-
-	public String requestNewTreeName() {
-
-		String name;
-		System.out.println("Introdueix el nom del arbre nou per comprobar que no existeix a la base de dades.");
-		name = sc.next();
-		sc.nextLine();
-		return name;
-
-	}
-	public float requestNewTreeHeight() {
-
-		float height;
-		System.out.println("Introdueix l'alçada del arbre nou per comprobar que no existeix a la base de dades.");
-		height = sc.nextFloat();
-		sc.nextLine();
-		return height;
-
-	}*/
-
-
 	//cambiar de clase
 	public <T> int findIndex(List<T> list, Object obj) {
 		
