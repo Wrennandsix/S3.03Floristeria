@@ -52,7 +52,7 @@ public class App {
 				try {
 					f.removeTree();
 				} catch (Exception e) {
-					System.out.println("L'arbre amb aquest id no existeix actualment a la base de dades");
+					System.err.println("Error! l'arbre amb aquest id no existeix actualment a la base de dades.");
 					e.printStackTrace();
 				}
 				break;
@@ -60,7 +60,7 @@ public class App {
 				try {
 					f.removeFlower();
 				} catch (Exception e) {
-					System.out.println("La flor amb aquest id no existeix actualment a la base de dades");
+					System.err.println("Error! la flor amb aquest id no existeix actualment a la base de dades.");
 					e.printStackTrace();
 				}
 				break;
@@ -68,7 +68,7 @@ public class App {
 				try {
 					f.removeDecor();
 				} catch (Exception e) {
-					System.out.println("La decoració amb aquest id no existeix actualment a la base de dades");
+					System.err.println("Error! la decoració amb aquest id no existeix actualment a la base de dades.");
 					e.printStackTrace();
 				}
 				break;

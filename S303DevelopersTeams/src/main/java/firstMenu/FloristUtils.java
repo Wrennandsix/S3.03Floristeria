@@ -23,7 +23,9 @@ public class FloristUtils {
 
 	public int findFlorist(int id) {
 
-		OptionalInt index = IntStream.range(0, florists.size()).filter(i -> florists.get(i).getId() == id).findFirst();
+		OptionalInt index = IntStream.range(0, florists.size())
+				.filter(i -> florists.get(i).getId() == id)
+				.findFirst();
 
 		return index.orElse(-1);
 	}

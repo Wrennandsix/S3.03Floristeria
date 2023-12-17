@@ -24,6 +24,7 @@ public class FirstMenu {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				break;
 			case 2:
 				try {
 					florist = manager.accesFlorist();
