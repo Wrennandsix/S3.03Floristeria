@@ -12,7 +12,7 @@ public class Tree extends Product {
 	private static int nextId = 0;
 
 	public Tree() {
-
+		this.id = ++nextId;
 	}
 
 	public Tree(String name, float price, float height, int stock) {
@@ -59,7 +59,7 @@ public class Tree extends Product {
 	
 	@Override
 	public String toString() {
-		return "Tree [height=" + height + ", name=" + name + ", price=" + price + ", id=" + id + "]";
+		return "Tree [height=" + height + ", name=" + name + ", price=" + price + ", stock=" + stock + ", id=" + id + "]";
 	}
 
 

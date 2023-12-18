@@ -16,16 +16,17 @@ public class App {
 	
 	public static void main(String[] args) {
 
+
+		try {
+			FloristUtils.readFlorists();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//Florist f = createDataBase();
 		Florist f = FirstMenu.firstMenu();
 
-		try {
-			FloristUtils.readFlorist();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	
 		int choice;
 
@@ -100,24 +101,14 @@ public class App {
 			case 0:
 				try {
 					FloristUtils.writeDecors();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
 					FloristUtils.writeTrees();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
 					FloristUtils.writeFlowers();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
 					FloristUtils.writeFlorists();
+					FloristUtils.writeTickets();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 				System.out.println("Fins aviat maco!");
 				break;
 
@@ -151,41 +142,41 @@ public class App {
 
 		return option;
 	}
-	public static Florist  createDataBase() {
+	//public static Florist  createDataBase() {
 		
-		Florist f = new Florist("Floristeria 1");
-		
-		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
-		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
-		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
-		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
-		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
-		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
-		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
-		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
-		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-
-		//System.out.println("preu total: " + f.valueTotal() + "€");
-		
-		
+//		Florist f = new Florist("Floristeria 1");
+//		
+//		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
+//		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
+//		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
+//		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
+//		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
+//		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
+//		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
+//		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
+//		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
+//
+//		//System.out.println("preu total: " + f.valueTotal() + "€");
+//		
+//		
 //		// escribe en un txt las flotisterias.
 //		ArrayList <Florist> allFlorist = new ArrayList<Florist>();
 //		allFlorist.add(f);
 //		String absolutePath = new File("").getAbsolutePath();
 //		String outputFile = absolutePath + ".dataBase.txt";
 //		Writter.writeText(allFlorist, outputFile);
-		
-		//simula una venta con la creacion de su ticket
-		ArrayList <Product> testSell = new ArrayList<Product>();		
-		testSell.add(f.getTreeList().get(0));
-		testSell.add(f.getTreeList().get(1));	
-		Ticket ticket = new Ticket(f.getName(), f/*,testSell*/);
-		
-		System.out.println(ticket);
-		
-		return f;
+//		
+//		//simula una venta con la creacion de su ticket
+//		ArrayList <Product> testSell = new ArrayList<Product>();		
+//		testSell.add(f.getTreeList().get(0));
+//		testSell.add(f.getTreeList().get(1));	
+//		Ticket ticket = new Ticket(f.getName(), f/*,testSell*/);
+//		
+//		System.out.println(ticket);
+//		
+//		return f;
 
 		
-	}
+//}
 }
 

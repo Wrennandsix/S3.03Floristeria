@@ -21,6 +21,10 @@ public class Ticket {
 	private int id;
 	private static int nextId = 0;
 	
+	public Ticket(){
+		this.id = ++nextId;
+	}
+	
 	public Ticket(String name, Florist florist) {
 		this.florist = florist;
 		this.id = ++nextId;

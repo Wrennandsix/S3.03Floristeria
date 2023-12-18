@@ -13,7 +13,7 @@ public class Decor extends Product {
 	private static int nextId = 0;
 
 	public Decor(){
-		
+		this.id = ++nextId;
 	}
 	public Decor(String name, float price, String material , int stock) {
 		super(name, price, stock);

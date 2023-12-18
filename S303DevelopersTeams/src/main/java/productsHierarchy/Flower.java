@@ -12,7 +12,7 @@ public class Flower extends Product {
 	private static int nextId = 0;
 
 	public Flower() {
-
+		this.id = ++nextId;
 	}
 	public Flower(String name, float price, String colour,int stock) {
 		super(name, price, stock);

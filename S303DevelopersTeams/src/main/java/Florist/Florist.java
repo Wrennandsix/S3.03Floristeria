@@ -3,6 +3,8 @@ package Florist;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,14 +37,15 @@ public class Florist {
 	private static int nextId = 0;
 	
 	public Florist() {
-		
+		this.id = nextId++;
+		this.ticketList = new ArrayList<Ticket>();
 	}
 	public Florist(String name) {
 		this.name = name;
 		this.treeList = new ArrayList<Tree>();
 		this.flowerList = new ArrayList<Flower>();
 		this.decorList = new ArrayList<Decor>();
-		this.ticketList = new ArrayList<Ticket>();
+		//this.ticketList = new ArrayList<Ticket>();
 		this.id = ++nextId;
 	}
 	
@@ -80,6 +83,45 @@ public class Florist {
 		return id;
 	}
 
+	public void readTrees() throws IOException, ParseException{
+
+		CsvProcessor<Tree> csvProcessor = new CsvProcessor<Tree>(Tree.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + this.name + "treeDataBase.txt";
+        File csvFile = new File(outputFile);
+        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
+        treeList = (ArrayList<Tree>) csvProcessor.readAll(csvFile, null);
+        treeList.forEach(t -> System.out.println(t.toString()));
+
+    }
+	
+	public void readFlowers() throws IOException, ParseException{
+
+		CsvProcessor<Flower> csvProcessor = new CsvProcessor<Flower>(Flower.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";
+        File csvFile = new File(outputFile);
+        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
+        flowerList = (ArrayList<Flower>) csvProcessor.readAll(csvFile, null);
+        flowerList.forEach(f -> System.out.println(f.toString()));
+
+    }
+	
+	public void readDecors() throws IOException, ParseException{
+
+		CsvProcessor<Decor> csvProcessor = new CsvProcessor<Decor>(Decor.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + this.name + "decorDataBase.txt";
+        File csvFile = new File(outputFile);
+        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
+        decorList = (ArrayList<Decor>) csvProcessor.readAll(csvFile, null);
+        decorList.forEach(f -> System.out.println(f.toString()));
+
+    }
+	
 	//cambiar de clase
 	public <T> int findIndex(List<T> list, Object obj) {
 		
@@ -463,7 +505,7 @@ public class Florist {
 			e.printStackTrace();
 		}
 		
-		ticketList.add(ticket);
+		this.ticketList.add(ticket);
 	}
 	
 	public float valueTrees() {
