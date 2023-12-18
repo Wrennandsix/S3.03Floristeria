@@ -46,13 +46,17 @@ public class Florist {
 		this.id = ++nextId;
 	}
 	
-	
-	
+	public List<Ticket> getTicketList() {
+		return ticketList;
+	}
+
+	public void setTicketList(List<Ticket> ticketList) {
+		this.ticketList = ticketList;
+	}
+
 	public String getName() {
 		return name;
 	}
-
-
 
 	public List<Tree> getTreeList() {
 		return treeList;

@@ -20,7 +20,12 @@ public class App {
 		//Florist f = createDataBase();
 		Florist f = FirstMenu.firstMenu();
 
-		
+		try {
+			FloristUtils.readFlorist();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 		int choice;
 

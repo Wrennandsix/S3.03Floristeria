@@ -2,17 +2,22 @@ package ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.j256.simplecsv.common.CsvColumn;
+
 import Florist.Florist;
 import input.Input;
 import productsHierarchy.Product;
 
 
 public class Ticket {
-	
+	@CsvColumn(columnName = "name")
 	private String name;
 	private Florist florist;
-	private ArrayList<Product> productsList = new ArrayList<Product>();;
+	private ArrayList<Product> productsList = new ArrayList<Product>();
+	@CsvColumn(columnName = "price")
 	private float price = 0;
+	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
 	
