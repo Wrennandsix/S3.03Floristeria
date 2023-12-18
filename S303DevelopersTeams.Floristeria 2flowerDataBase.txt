@@ -1,0 +1,2 @@
+"colour","id","name","price","stock"
+"lila",3,"flor3",2.0,2

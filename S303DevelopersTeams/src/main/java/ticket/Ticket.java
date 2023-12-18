@@ -3,21 +3,31 @@ package ticket;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.j256.simplecsv.common.CsvColumn;
+
+import Florist.Florist;
+import input.Input;
 import productsHierarchy.Product;
 
+
 public class Ticket {
-	
+	@CsvColumn(columnName = "name")
 	private String name;
-	private List<Product>productsList;
-	private float Price;
-	int id;
+	private Florist florist;
+	private ArrayList<Product> productsList = new ArrayList<Product>();
+	@CsvColumn(columnName = "price")
+	private float price = 0;
+	@CsvColumn(columnName = "id")
+	private int id;
 	private static int nextId = 0;
 	
-	public Ticket(String name, List<Product> productsList, float price, int id) {
-		this.name = name;
-		this.productsList = new ArrayList<Product>();
-		Price = price;
-		this.id = nextId++;
+	public Ticket(){
+		this.id = ++nextId;
+	}
+	
+	public Ticket(String name, Florist florist) {
+		this.florist = florist;
+		this.id = ++nextId;
 	}
 
 	public String getName() {
@@ -32,16 +42,17 @@ public class Ticket {
 		return productsList;
 	}
 
-	public void setProductsList(List<Product> productsList) {
+	public void setProductsList(ArrayList<Product> productsList) {
 		this.productsList = productsList;
+		
 	}
 
 	public float getPrice() {
-		return Price;
+		return price;
 	}
 
 	public void setPrice(float price) {
-		Price = price;
+		this.price = price;
 	}
 
 	public int getId() {
@@ -51,16 +62,62 @@ public class Ticket {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	
+	public void addProducts() throws Exception {
+		
+		int opcio;
 
+		do {
+			opcio = Input.readInt("Afegir productes al ticket:"
+					+ "\n1- Agegir arbre."
+					+ "\n2- Afegir flor."
+					+ "\n3- Afegir decoració."
+					+ "\n0- Deixar d'afegir productes");
+
+			switch (opcio) {
+			case 1:
+				try {
+					productsList.add(florist.withdrawTree());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+				try {
+					productsList.add(florist.withdrawFlower());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			case 3:
+				try {
+					productsList.add(florist.withdrawDecor());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+			case 0:
+				System.out.println("Gracies per la compra, productes comprats:"+ productsList);
+		
+				break;
+
+			default:
+				System.out.println("Introdueix un numero valid del menu!!.");
+			}
+		} while (opcio != 0);
+	}
+		
+
+
+
+	public float calculatePrice() {
+
+		return (float) productsList.stream().mapToDouble(p -> p.getPrice() * p.getStock()).sum();
+	}
+	
 	@Override
 	public String toString() {
-		return "Ticket [name=" + name + ", productsList=" + productsList + ", Price=" + Price + ", id=" + id + "]";
-	}
-
-	public float calculatePrice(ArrayList<Product> productsList) {
-
-		return (float) productsList.stream()
-				.mapToDouble(Product::getPrice)
-				.sum();
+		return "Ticket [name=" + name + ", productsList=" + productsList + ", Price=" + price + ", id=" + id + "]";
 	}
 }

@@ -2,7 +2,10 @@ package exceptions;
 
 public class NoStockException extends Exception{
 	
-	 public NoStockException(){
+	private static final long serialVersionUID = 1L;
+
+
+	public NoStockException(){
 	    }
 	    
 	    
