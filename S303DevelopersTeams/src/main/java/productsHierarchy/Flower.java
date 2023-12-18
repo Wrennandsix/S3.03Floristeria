@@ -2,12 +2,18 @@ package productsHierarchy;
 
 import java.util.Objects;
 
-public class Flower extends Product {
+import com.j256.simplecsv.common.CsvColumn;
 
+public class Flower extends Product {
+	@CsvColumn(columnName = "colour")
 	private String colour;
+	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
-	
+
+	public Flower() {
+
+	}
 	public Flower(String name, float price, String colour,int stock) {
 		super(name, price, stock);
 		this.colour = colour;

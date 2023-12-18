@@ -4,6 +4,7 @@ package ITacademy.S303DeveloperTeam;
 import java.util.ArrayList;
 import Florist.Florist;
 import firstMenu.FirstMenu;
+import firstMenu.FloristUtils;
 import input.Input;
 import productsHierarchy.Decor;
 import productsHierarchy.Flower;
@@ -18,8 +19,9 @@ public class App {
 		
 		//Florist f = createDataBase();
 		Florist f = FirstMenu.firstMenu();
+
 		
-		
+	
 		int choice;
 
 		do {
@@ -91,7 +93,27 @@ public class App {
 				f.printTotalProfit();
 				break;
 			case 0:
-				System.out.println("Estas sortint de l'aplicacio");
+				try {
+					FloristUtils.writeDecors();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					FloristUtils.writeTrees();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					FloristUtils.writeFlowers();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					FloristUtils.writeFlorists();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println("Fins aviat maco!");
 				break;
 
 			default:

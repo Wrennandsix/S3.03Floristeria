@@ -2,12 +2,19 @@ package productsHierarchy;
 
 import java.util.Objects;
 
-public class Decor extends Product {
+import com.j256.simplecsv.common.CsvColumn;
 
+public class Decor extends Product {
+	
+	@CsvColumn(columnName = "material")
 	private String material;
+	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
 
+	public Decor(){
+		
+	}
 	public Decor(String name, float price, String material , int stock) {
 		super(name, price, stock);
 		this.material = material;

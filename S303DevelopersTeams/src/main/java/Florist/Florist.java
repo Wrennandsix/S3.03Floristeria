@@ -1,12 +1,18 @@
 package Florist;
 
 
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+
+import com.j256.simplecsv.common.CsvColumn;
+import com.j256.simplecsv.processor.CsvProcessor;
+
 import exceptions.NoStockException;
 import productsHierarchy.Decor;
 import input.Input;
@@ -18,16 +24,19 @@ public class Florist {
 	
 	private static Scanner sc = new Scanner(System.in); 
 	
-	
+	@CsvColumn(columnName = "name")
 	private String name;
 	private List<Tree> treeList;
 	private List<Flower> flowerList;
 	private List<Decor> decorList;
 	private List<Ticket> ticketList;
+	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
 	
-	
+	public Florist() {
+		
+	}
 	public Florist(String name) {
 		this.name = name;
 		this.treeList = new ArrayList<Tree>();
@@ -506,6 +515,36 @@ public class Florist {
 	public String toString() {
 		return "Florist [name=" + name + ", treeList=" + treeList + ", flowerList=" + flowerList + ", decorList="
 				+ decorList + ", ticketsList=" + ticketList + ", id=" + id + "]";
+	}
+	public void writeDecor() throws Exception {
+		
+		CsvProcessor<Decor> csvProcessor = new CsvProcessor<Decor>(Decor.class);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + ".decorDataBase.txt";
+		File csvFile = new File(outputFile);
+		
+		csvProcessor.writeAll(csvFile, decorList, true);
+		
+	}
+	public void writeTree() throws Exception {
+		
+		CsvProcessor<Tree> csvProcessor = new CsvProcessor<Tree>(Tree.class);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + ".treeDataBase.txt";
+		File csvFile = new File(outputFile);
+		
+		csvProcessor.writeAll(csvFile, treeList, true);
+		
+	}
+	public void writeFlower() throws Exception {
+		
+		CsvProcessor<Flower> csvProcessor = new CsvProcessor<Flower>(Flower.class);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + ".flowerDataBase.txt";
+		File csvFile = new File(outputFile);
+		
+		csvProcessor.writeAll(csvFile, flowerList, true);
+		
 	}
 
 }

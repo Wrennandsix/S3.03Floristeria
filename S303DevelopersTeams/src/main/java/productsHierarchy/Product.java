@@ -2,17 +2,25 @@ package productsHierarchy;
 
 import java.util.Objects;
 
-public abstract class Product {
+import com.j256.simplecsv.common.CsvColumn;
 
+public abstract class Product {
+	@CsvColumn(columnName = "name")
 	protected String name;
+	@CsvColumn(columnName = "price")
 	protected float price;
+	@CsvColumn(columnName = "stock")
 	protected int stock;
+
+	public Product() {
+
+	}
 
 	public Product(String name, float price, int stock) {
 		this.name = name;
 		this.price = price;
 		this.stock = stock;
-		
+
 	}
 
 	public int getStock() {

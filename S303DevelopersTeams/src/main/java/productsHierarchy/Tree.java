@@ -2,13 +2,20 @@ package productsHierarchy;
 
 import java.util.Objects;
 
-public class Tree extends Product {
+import com.j256.simplecsv.common.CsvColumn;
 
+public class Tree extends Product {
+	@CsvColumn(columnName = "height")
 	private float height;
+	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
 
-	public Tree(String name, float price, float height,int stock) {
+	public Tree() {
+
+	}
+
+	public Tree(String name, float price, float height, int stock) {
 		super(name, price, stock);
 		this.height = height;
 		this.id = ++nextId;
