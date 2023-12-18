@@ -56,7 +56,7 @@ public class FloristUtils {
 			System.out.println("Floristeria amb nom: "+florist.getName()+" y id: "+florist.getId()+" afegida correctament a la base de dades.");
 
 		} else {
-			System.out.println("La floristeria que intentes afegir a la base de dades ja existeix");
+			System.out.println("La floristeria que intentes afegir amb: "+id+" ja existeix en la base de dades");
 
 		}
 	}
