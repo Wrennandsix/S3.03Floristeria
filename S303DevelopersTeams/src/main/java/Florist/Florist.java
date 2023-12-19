@@ -103,7 +103,6 @@ public class Florist {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         flowerList = (ArrayList<Flower>) csvProcessor.readAll(csvFile, null);
         flowerList.forEach(f -> System.out.println(f.toString()));
 
@@ -116,11 +115,32 @@ public class Florist {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + "." + this.name + "decorDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         decorList = (ArrayList<Decor>) csvProcessor.readAll(csvFile, null);
         decorList.forEach(f -> System.out.println(f.toString()));
 
     }
+	
+	public void readTickets() throws IOException, ParseException {
+		
+		CsvProcessor<Ticket> csvProcessor = new CsvProcessor<Ticket>(Ticket.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + this.name + "ticketDataBase.txt";
+        File csvFile = new File(outputFile);
+        ticketList = (ArrayList<Ticket>) csvProcessor.readAll(csvFile, null);
+        ticketList.forEach(f -> System.out.println(f.toString()));	
+	}
+	
+	public void readProducts() {
+		ticketList.forEach(t -> {
+			try {
+				t.readProducts();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		
+	}
 	
 	//cambiar de clase
 	public <T> int findIndex(List<T> list, Object obj) {
@@ -590,6 +610,18 @@ public class Florist {
 		File csvFile = new File(outputFile);
 		
 		csvProcessor.writeAll(csvFile, flowerList, true);
+		
+	}
+	
+	public void writeFloristProducts() {
+		
+		ticketList.forEach(t -> {
+			try {
+				t.writeProducts();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		
 	}
 
