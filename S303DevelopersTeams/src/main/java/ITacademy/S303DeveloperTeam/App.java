@@ -1,6 +1,10 @@
 package ITacademy.S303DeveloperTeam;
 
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import Florist.Florist;
 import firstMenu.FirstMenu;
@@ -11,11 +15,29 @@ import productsHierarchy.Flower;
 import productsHierarchy.Product;
 import productsHierarchy.Tree;
 import ticket.Ticket;
+import SQLConnection.DatabaseConnection;
 
 public class App {
 	
 	public static void main(String[] args) {
 
+		Connection connection = DatabaseConnection.getConnection();
+		try {
+			Statement st = connection.createStatement();
+			st.execute("USE prueba;");
+
+			ResultSet query = st.executeQuery("SELECT * FROM tabla_prueba;");
+			
+			while(query.next())
+			{
+				System.out.println(query.getString("nombre"));
+			
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			FloristUtils.readFlorists();
@@ -176,7 +198,6 @@ public class App {
 //		
 //		return f;
 
-		
 //}
 }
 
