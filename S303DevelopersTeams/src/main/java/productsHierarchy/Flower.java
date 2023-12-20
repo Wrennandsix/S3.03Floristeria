@@ -38,6 +38,10 @@ public class Flower extends Product {
 	public int getId() {
 		return id;
 	}
+	
+	public static void setNextId() {
+		nextId --;
+	}
 
 	@Override
 	public int hashCode() {

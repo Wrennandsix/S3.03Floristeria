@@ -39,6 +39,10 @@ public class Decor extends Product {
 		return id;
 	}
 	
+	public static void setNextId() {
+		nextId --;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

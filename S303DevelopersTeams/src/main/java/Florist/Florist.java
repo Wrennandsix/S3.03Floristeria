@@ -23,8 +23,7 @@ import productsHierarchy.Tree;
 import ticket.Ticket;
 
 public class Florist {
-	
-	private static Scanner sc = new Scanner(System.in); 
+	 
 	
 	@CsvColumn(columnName = "name")
 	private String name;
@@ -203,8 +202,6 @@ public class Florist {
 			int index = findIndex(treeList, tree);
 			addStockTree(treeList.get(index), stock);
 		}
-		sc.nextLine();
-
 	}
 
 	public Tree findTree(Tree tree) {
@@ -260,7 +257,7 @@ public class Florist {
 			int index = findIndex(flowerList, flower);
 			addStockFlower(flowerList.get(index), stock);
 		}
-		sc.nextLine();
+
 
 	}
 
@@ -317,8 +314,6 @@ public class Florist {
 			int index = findIndex(decorList, decor);
 			addStockDecor(decorList.get(index), stock);
 		}
-		sc.nextLine();
-
 	}
 	
 	public Decor findDecor(Decor decor) {
@@ -367,6 +362,7 @@ public class Florist {
 						"Arbre: " + treeList.get(indexFound).toString() + " ha sigut eliminat de la base de dades.");
 				
 				treeList.remove(indexFound);
+				Tree.setNextId();
 			}
 		}
 	}
@@ -384,6 +380,7 @@ public class Florist {
 				System.out.println(
 						"Flor: " + flowerList.get(indexFound).toString() + " ha sigut eliminada de la base de dades.");
 				flowerList.remove(indexFound);
+				Flower.setNextId();
 			}
 		}
 	}
@@ -403,6 +400,7 @@ public class Florist {
 				System.out.println("Decoració: " + decorList.get(indexFound).toString()
 						+ " ha sigut eliminat de la base de dades.");
 				decorList.remove(indexFound);
+				Decor.setNextId();
 			}
 		}
 	}
@@ -421,10 +419,10 @@ public class Florist {
 		
 		if((treeList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
-			tree = new Tree(treeList.get(id- 1));
-			treeList.remove(id -1);
-			return tree;
+//		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
+//			tree = new Tree(treeList.get(id- 1));
+//			treeList.remove(id -1);
+//			return tree;
 		}else {
 			treeList.get(id -1).setStock(treeList.get(id -1).getStock() - quantity);
 			tree = new Tree(treeList.get(id- 1));
@@ -447,10 +445,10 @@ public class Florist {
 		
 		if((flowerList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
-			flower = new Flower(flowerList.get(id -1));
-			flowerList.remove(id -1);
-			return flower;
+//		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
+//			flower = new Flower(flowerList.get(id -1));
+//			flowerList.remove(id -1);
+//			return flower;
 		}else {
 			flower = new Flower(flowerList.get(id -1));
 			flowerList.get(id -1).setStock(flowerList.get(id -1).getStock() - quantity);
@@ -474,10 +472,11 @@ public class Florist {
 		
 		if((decorList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((decorList.get(id-1).getStock() - quantity) == 0) {
-			decor = new Decor(decorList.get(id -1));
-			decorList.remove(id -1);
-			return decor;
+//		}
+//		else if((decorList.get(id-1).getStock() - quantity) == 0) {
+//			decor = new Decor(decorList.get(id -1));
+//			decorList.remove(id -1);
+//			return decor;
 		}else {
 			decor = new Decor(decorList.get(id -1));
 			decorList.get(id -1).setStock(decorList.get(id -1).getStock() - quantity);
@@ -516,10 +515,13 @@ public class Florist {
 
 	public void addTicket() {
 		
-		Ticket ticket = new Ticket("Ticket" + this.name, this);
+		Ticket ticket = new Ticket();
+		ticket.setName("Ticket" + this.name);
+		ticket.setFlorist(this);
 		
 		try {
 			ticket.addProducts();
+			ticket.setPrice(ticket.calculatePrice());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
