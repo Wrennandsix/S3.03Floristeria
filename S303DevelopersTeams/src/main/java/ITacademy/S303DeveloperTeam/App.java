@@ -23,7 +23,7 @@ public class App {
 			e.printStackTrace();
 		}
 		
-		FloristUtils.createDataBase();
+		//FloristUtils.createDataBase();
 		Florist f = FirstMenu.firstMenu();
 
 		
