@@ -86,6 +86,7 @@ public class FloristUtils {
 	    return florist;
 	}
  
+
 //	public static void  createDataBase() {
 //		
 //		Florist f = new Florist("Floristeria 1");
@@ -109,6 +110,31 @@ public class FloristUtils {
 //
 //		
 //	}
+
+	public static void  createDataBase() {
+		
+		Florist f = new Florist("Floristeria 1");
+		Florist flo = new Florist("Floristeria 2");
+
+		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
+		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
+		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
+		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
+		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
+		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
+		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
+		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
+		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
+		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
+		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
+		flo.getFlowerList().add(new Flower("flor3", 2, "lila", 2));
+
+		florists.add(f);
+		florists.add(flo);
+
+		
+	}
+
 	public static void readFlorists() throws IOException, ParseException{
 
         CsvProcessor<Florist> csvProcessor = new CsvProcessor<Florist>(Florist.class);
@@ -123,7 +149,9 @@ public class FloristUtils {
 				f.readTrees();
 				f.readFlowers();
 				f.readDecors();
-			} catch (IOException | ParseException e) {			
+				f.readTickets();
+				f.readProducts();
+			} catch (IOException | ParseException e) {	
 				e.printStackTrace();
 			}
 		});
@@ -183,6 +211,11 @@ public class FloristUtils {
 			csvProcessor.writeAll(csvFile, florist.getTicketList(), true);
 			System.out.println("Tickets de la floristeria "+florist.getName() +" guardades exitosament a la base de dades.");
 		}				
+	}
+	
+	public static void writeProducts() {
+		
+		florists.forEach(f -> f.writeFloristProducts());
 	}
 //	public static void readTrees() throws Exception {
 //		

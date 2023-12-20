@@ -1,9 +1,13 @@
 package ticket;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.simplecsv.common.CsvColumn;
+import com.j256.simplecsv.processor.CsvProcessor;
 
 import Florist.Florist;
 import input.Input;
@@ -112,6 +116,27 @@ public class Ticket {
 	public float calculatePrice() {
 
 		return (float) productsList.stream().mapToDouble(p -> p.getPrice() * p.getStock()).sum();
+	}
+	
+	public void readProducts() throws IOException, ParseException {
+		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + id + name + "productDataBase.txt";
+        File csvFile = new File(outputFile);
+        productsList = (ArrayList<Product>) csvProcessor.readAll(csvFile, null);
+        productsList.forEach(p -> System.out.println(p.toString()));	
+	}
+	
+	public void writeProducts() throws Exception {
+
+		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + "." + id + florist.getName() + "productDataBase.txt";
+		File csvFile = new File(outputFile);
+		csvProcessor.writeAll(csvFile, productsList, true);
+		System.out.println("Productes del ticket "+ name +" guardades exitosament a la base de dades.");
+
 	}
 	
 	@Override
