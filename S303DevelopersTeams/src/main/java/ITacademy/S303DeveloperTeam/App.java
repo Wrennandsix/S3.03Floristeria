@@ -1,16 +1,12 @@
 package ITacademy.S303DeveloperTeam;
 
 
-import java.util.ArrayList;
+
 import Florist.Florist;
 import firstMenu.FirstMenu;
 import firstMenu.FloristUtils;
 import input.Input;
-import productsHierarchy.Decor;
-import productsHierarchy.Flower;
-import productsHierarchy.Product;
-import productsHierarchy.Tree;
-import ticket.Ticket;
+
 
 public class App {
 	
@@ -26,8 +22,6 @@ public class App {
 		//Florist f = createDataBase();
 		Florist f = FirstMenu.firstMenu();
 
-		
-	
 		int choice;
 
 		do {
@@ -98,6 +92,9 @@ public class App {
 			case 13:
 				f.printTotalProfit();
 				break;
+			case 14:
+				
+				break;
 			case 0:
 				try {
 					FloristUtils.writeDecors();
@@ -108,7 +105,6 @@ public class App {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
 				System.out.println("Fins aviat maco!");
 				break;
 
@@ -139,7 +135,6 @@ public class App {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return option;
 	}
 	//public static Florist  createDataBase() {

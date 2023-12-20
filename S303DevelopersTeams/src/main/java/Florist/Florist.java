@@ -301,8 +301,6 @@ public class Florist {
 
 	}
 	
-
-
 	public Decor findDecor(Decor decor) {
 
 		Optional<Decor> decorFound = decorList.stream()
@@ -347,6 +345,7 @@ public class Florist {
 			if (id == treeList.get(indexFound).getId()) {
 				System.out.println(
 						"Arbre: " + treeList.get(indexFound).toString() + " ha sigut eliminat de la base de dades.");
+				
 				treeList.remove(indexFound);
 			}
 		}
