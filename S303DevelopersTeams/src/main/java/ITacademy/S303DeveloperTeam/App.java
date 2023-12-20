@@ -1,16 +1,11 @@
 package ITacademy.S303DeveloperTeam;
 
 
-import java.util.ArrayList;
 import Florist.Florist;
 import firstMenu.FirstMenu;
 import firstMenu.FloristUtils;
 import input.Input;
-import productsHierarchy.Decor;
-import productsHierarchy.Flower;
-import productsHierarchy.Product;
-import productsHierarchy.Tree;
-import ticket.Ticket;
+
 
 public class App {
 	

@@ -113,8 +113,6 @@ public class Ticket {
 	}
 		
 
-
-
 	public float calculatePrice() {
 
 		return (float) productsList.stream().mapToDouble(p -> p.getPrice() * p.getStock()).sum();
