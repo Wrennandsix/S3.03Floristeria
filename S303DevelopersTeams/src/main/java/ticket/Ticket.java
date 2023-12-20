@@ -67,6 +67,10 @@ public class Ticket {
 		this.id = id;
 	}
 	
+	public void setFlorist(Florist florist) {
+		this.florist = florist;
+	}
+	
 	
 	public void addProducts() throws Exception {
 		

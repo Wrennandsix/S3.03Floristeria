@@ -1,16 +1,9 @@
 package ITacademy.S303DeveloperTeam;
 
-
-import java.util.ArrayList;
 import Florist.Florist;
 import firstMenu.FirstMenu;
 import firstMenu.FloristUtils;
 import input.Input;
-import productsHierarchy.Decor;
-import productsHierarchy.Flower;
-import productsHierarchy.Product;
-import productsHierarchy.Tree;
-import ticket.Ticket;
 
 public class App {
 	
@@ -144,9 +137,5 @@ public class App {
 		return option;
 	}
 
-<<<<<<< HEAD
-//}
-=======
->>>>>>> branch 'Gerard-Benages-Chalé' of https://github.com/Wrennandsix/S3.03DevelopersTeam
 }
 

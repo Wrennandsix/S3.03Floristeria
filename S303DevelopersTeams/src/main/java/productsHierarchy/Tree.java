@@ -39,6 +39,10 @@ public class Tree extends Product {
 		return id;
 	}
 	
+	public static void setNextId() {
+		nextId --;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(height);
