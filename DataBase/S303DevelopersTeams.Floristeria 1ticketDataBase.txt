@@ -1,0 +1,8 @@
+"name","price","id"
+<<<<<<< HEAD
+"",0.0,1
+"TicketFloristeria 1",39.6,2
+"TicketFloristeria 1",34.6,3
+=======
+"Floristeria 1",30.0,1
+>>>>>>> branch 'Gerard-Benages-Chalé' of https://github.com/Wrennandsix/S3.03DevelopersTeam
