@@ -23,8 +23,7 @@ import productsHierarchy.Tree;
 import ticket.Ticket;
 
 public class Florist {
-	
-	private static Scanner sc = new Scanner(System.in); 
+	 
 	
 	@CsvColumn(columnName = "name")
 	private String name;
@@ -45,7 +44,7 @@ public class Florist {
 		this.treeList = new ArrayList<Tree>();
 		this.flowerList = new ArrayList<Flower>();
 		this.decorList = new ArrayList<Decor>();
-		//this.ticketList = new ArrayList<Ticket>();
+		this.ticketList = new ArrayList<Ticket>();
 		this.id = ++nextId;
 	}
 	
@@ -90,9 +89,8 @@ public class Florist {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + "." + this.name + "treeDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         treeList = (ArrayList<Tree>) csvProcessor.readAll(csvFile, null);
-        treeList.forEach(t -> System.out.println(t.toString()));
+       //treeList.forEach(t -> System.out.println(t.toString()));
 
     }
 	
@@ -101,11 +99,10 @@ public class Florist {
 		CsvProcessor<Flower> csvProcessor = new CsvProcessor<Flower>(Flower.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";
+        String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";	
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         flowerList = (ArrayList<Flower>) csvProcessor.readAll(csvFile, null);
-        flowerList.forEach(f -> System.out.println(f.toString()));
+        //flowerList.forEach(f -> System.out.println(f.toString()));
 
     }
 	
@@ -116,13 +113,33 @@ public class Florist {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + "." + this.name + "decorDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         decorList = (ArrayList<Decor>) csvProcessor.readAll(csvFile, null);
-        decorList.forEach(f -> System.out.println(f.toString()));
+        //decorList.forEach(f -> System.out.println(f.toString()));
 
     }
 	
-	//cambiar de clase
+	public void readTickets() throws IOException, ParseException {
+		
+		CsvProcessor<Ticket> csvProcessor = new CsvProcessor<Ticket>(Ticket.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + this.name + "ticketDataBase.txt";
+        File csvFile = new File(outputFile);
+        ticketList = (ArrayList<Ticket>) csvProcessor.readAll(csvFile, null);
+        //ticketList.forEach(f -> System.out.println(f.toString()));	
+	}
+	
+	public void readProducts() {
+		ticketList.forEach(t -> {
+			try {
+				t.readProducts();
+			} catch (IOException | ParseException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
+
 	public <T> int findIndex(List<T> list, Object obj) {
 		
 		Optional<Integer> index = IntStream.range(0, list.size())
@@ -174,7 +191,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat d'abres a afegir:");
 
-		Tree tree = new Tree(name, price, height, stock);
+		Tree tree = new Tree(name, price, stock,  height);
 		if (findTree(tree) == null) {
 			treeList.add(tree);
 			System.out.println("Abre afegit: " + tree);
@@ -183,8 +200,6 @@ public class Florist {
 			int index = findIndex(treeList, tree);
 			addStockTree(treeList.get(index), stock);
 		}
-		sc.nextLine();
-
 	}
 
 	public Tree findTree(Tree tree) {
@@ -211,7 +226,7 @@ public class Florist {
 
 		System.out.println("Arbres actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
+		treeList.forEach(tree -> System.out.println("ID:" + (treeList.indexOf(tree) + 1) + "	Nom: " + tree.getName() + "	Alçada: "
 				+ tree.getHeight() + "	Stock: " + tree.getStock()));
 
 	}
@@ -231,7 +246,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat de flors a afegir:");
 
-		Flower flower = new Flower(name, price, colour, stock);
+		Flower flower = new Flower(name, price, stock, colour);
 		if (findFlower(flower) == null) {
 			flowerList.add(flower);
 			System.out.println("Flor afegida: " + flower);
@@ -240,7 +255,7 @@ public class Florist {
 			int index = findIndex(flowerList, flower);
 			addStockFlower(flowerList.get(index), stock);
 		}
-		sc.nextLine();
+
 
 	}
 
@@ -269,7 +284,7 @@ public class Florist {
 
 		System.out.println("Flors actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: "
+		flowerList.forEach(flower -> System.out.println("ID:" + (flowerList.indexOf(flower) + 1) + "	Nom: " + flower.getName() + "	Color: "
 				+ flower.getColour() + "	Stock: " + flower.getStock()));
 
 	}
@@ -288,7 +303,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat de objectes decoratius a afegir:");
 
-		Decor decor = new Decor(name, price, material, stock);
+		Decor decor = new Decor(name, price, stock, material);
 		if (findDecor(decor) == null) {
 			decorList.add(decor);
 			System.out.println("Decoració afegida: " + decor);
@@ -297,12 +312,8 @@ public class Florist {
 			int index = findIndex(decorList, decor);
 			addStockDecor(decorList.get(index), stock);
 		}
-		sc.nextLine();
-
 	}
 	
-
-
 	public Decor findDecor(Decor decor) {
 
 		Optional<Decor> decorFound = decorList.stream()
@@ -328,7 +339,7 @@ public class Florist {
 
 		System.out.println("Decoracions actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Material: "
+		decorList.forEach(decor -> System.out.println("ID:" + (decorList.indexOf(decor) + 1) + "	Nom: " + decor.getName() + "	Material: "
 				+ decor.getMaterial() + "	Stock: " + decor.getStock()));
 
 	}
@@ -347,7 +358,9 @@ public class Florist {
 			if (id == treeList.get(indexFound).getId()) {
 				System.out.println(
 						"Arbre: " + treeList.get(indexFound).toString() + " ha sigut eliminat de la base de dades.");
+				
 				treeList.remove(indexFound);
+				Tree.setNextId();
 			}
 		}
 	}
@@ -365,6 +378,7 @@ public class Florist {
 				System.out.println(
 						"Flor: " + flowerList.get(indexFound).toString() + " ha sigut eliminada de la base de dades.");
 				flowerList.remove(indexFound);
+				Flower.setNextId();
 			}
 		}
 	}
@@ -384,6 +398,7 @@ public class Florist {
 				System.out.println("Decoració: " + decorList.get(indexFound).toString()
 						+ " ha sigut eliminat de la base de dades.");
 				decorList.remove(indexFound);
+				Decor.setNextId();
 			}
 		}
 	}
@@ -402,10 +417,10 @@ public class Florist {
 		
 		if((treeList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
-			tree = new Tree(treeList.get(id- 1));
-			treeList.remove(id -1);
-			return tree;
+//		}else if((treeList.get(id -1).getStock() - quantity) == 0) {
+//			tree = new Tree(treeList.get(id- 1));
+//			treeList.remove(id -1);
+//			return tree;
 		}else {
 			treeList.get(id -1).setStock(treeList.get(id -1).getStock() - quantity);
 			tree = new Tree(treeList.get(id- 1));
@@ -428,10 +443,10 @@ public class Florist {
 		
 		if((flowerList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
-			flower = new Flower(flowerList.get(id -1));
-			flowerList.remove(id -1);
-			return flower;
+//		}else if((flowerList.get(id -1).getStock() - quantity) == 0) {
+//			flower = new Flower(flowerList.get(id -1));
+//			flowerList.remove(id -1);
+//			return flower;
 		}else {
 			flower = new Flower(flowerList.get(id -1));
 			flowerList.get(id -1).setStock(flowerList.get(id -1).getStock() - quantity);
@@ -455,10 +470,11 @@ public class Florist {
 		
 		if((decorList.get(id -1).getStock() - quantity) < 0) {
 			throw new NoStockException();
-		}else if((decorList.get(id-1).getStock() - quantity) == 0) {
-			decor = new Decor(decorList.get(id -1));
-			decorList.remove(id -1);
-			return decor;
+//		}
+//		else if((decorList.get(id-1).getStock() - quantity) == 0) {
+//			decor = new Decor(decorList.get(id -1));
+//			decorList.remove(id -1);
+//			return decor;
 		}else {
 			decor = new Decor(decorList.get(id -1));
 			decorList.get(id -1).setStock(decorList.get(id -1).getStock() - quantity);
@@ -497,10 +513,13 @@ public class Florist {
 
 	public void addTicket() {
 		
-		Ticket ticket = new Ticket("Ticket" + this.name, this);
+		Ticket ticket = new Ticket();
+		ticket.setName(this.name);
+		ticket.setFlorist(this);
 		
 		try {
 			ticket.addProducts();
+			ticket.setPrice(ticket.calculatePrice());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -590,6 +609,18 @@ public class Florist {
 		File csvFile = new File(outputFile);
 		
 		csvProcessor.writeAll(csvFile, flowerList, true);
+		
+	}
+	
+	public void writeFloristProducts() {
+		
+		ticketList.forEach(t -> {
+			try {
+				t.writeProducts();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		
 	}
 

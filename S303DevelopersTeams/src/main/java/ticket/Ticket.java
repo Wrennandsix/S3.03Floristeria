@@ -1,9 +1,13 @@
 package ticket;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.j256.simplecsv.common.CsvColumn;
+import com.j256.simplecsv.processor.CsvProcessor;
 
 import Florist.Florist;
 import input.Input;
@@ -12,7 +16,7 @@ import productsHierarchy.Product;
 
 public class Ticket {
 	@CsvColumn(columnName = "name")
-	private String name;
+	private String floristName;
 	private Florist florist;
 	private ArrayList<Product> productsList = new ArrayList<Product>();
 	@CsvColumn(columnName = "price")
@@ -31,11 +35,11 @@ public class Ticket {
 	}
 
 	public String getName() {
-		return name;
+		return floristName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.floristName = name;
 	}
 
 	public List<Product> getProductsList() {
@@ -61,6 +65,10 @@ public class Ticket {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void setFlorist(Florist florist) {
+		this.florist = florist;
 	}
 	
 	
@@ -109,15 +117,34 @@ public class Ticket {
 	}
 		
 
-
-
 	public float calculatePrice() {
 
 		return (float) productsList.stream().mapToDouble(p -> p.getPrice() * p.getStock()).sum();
 	}
 	
+	public void readProducts() throws IOException, ParseException {
+		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
+
+        String absolutePath = new File("").getAbsolutePath();
+        String outputFile = absolutePath + "." + id +"Ticket"+ floristName + "productDataBase.txt";
+        File csvFile = new File(outputFile);
+        productsList = (ArrayList<Product>) csvProcessor.readAll(csvFile, null);
+        productsList.forEach(p -> System.out.println(p.toString()));	
+	}
+	
+	public void writeProducts() throws Exception {
+
+		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
+		String absolutePath = new File("").getAbsolutePath();
+		String outputFile = absolutePath + "." + id +"Ticket"+floristName + "productDataBase.txt";
+		File csvFile = new File(outputFile);
+		csvProcessor.writeAll(csvFile, productsList, true);
+		System.out.println("Productes del ticket "+ floristName +" guardades exitosament a la base de dades.");
+
+	}
+	
 	@Override
 	public String toString() {
-		return "Ticket [name=" + name + ", productsList=" + productsList + ", Price=" + price + ", id=" + id + "]";
+		return "Ticket [name=" + floristName + ", productsList=" + productsList + ", Price=" + price + ", id=" + id + "]";
 	}
 }

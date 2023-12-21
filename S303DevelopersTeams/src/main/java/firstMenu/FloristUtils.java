@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
-
 import com.j256.simplecsv.processor.CsvProcessor;
-
 import Florist.Florist;
 import input.Input;
 import productsHierarchy.Decor;
@@ -89,29 +86,21 @@ public class FloristUtils {
 	    return florist;
 	}
  
+
+
 	public static void  createDataBase() {
 		
-//		Florist f = new Florist("Floristeria 1");
-//		Florist flo = new Florist("Floristeria 2");
-//
-//		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
-//		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
-//		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
-//		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
-//		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
-//		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
-//		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
-//		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
-//		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getFlowerList().add(new Flower("flor3", 2, "lila", 2));
-//
-//		florists.add(f);
-//		florists.add(flo);
+		Florist f = new Florist("FloristeriaNunito");
 
-		
+
+		f.getTreeList().add(new Tree("Pi", 12.4f, 3, 33.9f));
+		f.getFlowerList().add(new Flower("Tulipa", 2, 2, "Groc"));
+		f.getDecorList().add(new Decor("Test", 2.50f, 2, "Plastic"));
+
+		florists.add(f);
+	
 	}
+
 	public static void readFlorists() throws IOException, ParseException{
 
         CsvProcessor<Florist> csvProcessor = new CsvProcessor<Florist>(Florist.class);
@@ -119,22 +108,21 @@ public class FloristUtils {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + ".floristDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         florists = (ArrayList<Florist>) csvProcessor.readAll(csvFile, null);
         florists.forEach(f -> {
 			try {
 				f.readTrees();
 				f.readFlowers();
 				f.readDecors();
-			} catch (IOException | ParseException e) {
-				
+				f.readTickets();
+				f.readProducts();
+			} catch (IOException | ParseException e) {	
 				e.printStackTrace();
 			}
 		});
-        florists.forEach(f -> System.out.println(f.toString()));
+        System.out.println("Floristerias carregades correctament.");
+        //florists.forEach(f -> System.out.println(f.toString()));
     }
-
-	
 	public static void writeFlorists() throws Exception {
 		
 		CsvProcessor<Florist> csvProcessor = new CsvProcessor<Florist>(Florist.class);
@@ -190,15 +178,10 @@ public class FloristUtils {
 			System.out.println("Tickets de la floristeria "+florist.getName() +" guardades exitosament a la base de dades.");
 		}				
 	}
-//	public static void readTrees() throws Exception {
-//		
-//		CsvProcessor<Tree> csvProcessor = new CsvProcessor<Tree>(Tree.class);
-//		String absolutePath = new File("").getAbsolutePath();
-//		String outputFile = absolutePath + ".treeDataBase.txt";
-//		File csvFile = new File(outputFile);
-//		List<Tree> readAccounts = csvProcessor.readRows(csvFile, true);
-//		
-//	}
-
+	
+	public static void writeProducts() {
+		
+		florists.forEach(f -> f.writeFloristProducts());
+	}
 	
 }
