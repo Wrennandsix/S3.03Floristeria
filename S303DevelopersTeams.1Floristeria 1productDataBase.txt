@@ -1,2 +1,0 @@
-"name","price","stock"
-"arbre1",33.0,1

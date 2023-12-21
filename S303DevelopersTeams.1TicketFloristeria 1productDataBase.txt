@@ -1,0 +1,4 @@
+"name","price","stock","height","colour","material"
+"arbre1",12.0,2,33.9,"",""
+"flor2",2.0,2,0.0,"blau",""
+"decor1",2.0,1,0.0,"","fusta"

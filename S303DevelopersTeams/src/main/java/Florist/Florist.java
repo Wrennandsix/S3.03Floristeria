@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.Scanner;
 import java.util.stream.IntStream;
-
 import com.j256.simplecsv.common.CsvColumn;
 import com.j256.simplecsv.processor.CsvProcessor;
-
 import exceptions.NoStockException;
 import productsHierarchy.Decor;
 import input.Input;
@@ -44,7 +41,7 @@ public class Florist {
 		this.treeList = new ArrayList<Tree>();
 		this.flowerList = new ArrayList<Flower>();
 		this.decorList = new ArrayList<Decor>();
-		//this.ticketList = new ArrayList<Ticket>();
+		this.ticketList = new ArrayList<Ticket>();
 		this.id = ++nextId;
 	}
 	
@@ -87,7 +84,7 @@ public class Florist {
 		CsvProcessor<Tree> csvProcessor = new CsvProcessor<Tree>(Tree.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + this.name + "treeDataBase.txt";
+        String outputFile = absolutePath + "." + this.name + "DataBase/treeDataBase.txt";
         File csvFile = new File(outputFile);
         //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         treeList = (ArrayList<Tree>) csvProcessor.readAll(csvFile, null);
@@ -100,7 +97,7 @@ public class Florist {
 		CsvProcessor<Flower> csvProcessor = new CsvProcessor<Flower>(Flower.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";	
+        String outputFile = absolutePath + "." + this.name + "DataBase/flowerDataBase.txt";	
         File csvFile = new File(outputFile);
         flowerList = (ArrayList<Flower>) csvProcessor.readAll(csvFile, null);
         flowerList.forEach(f -> System.out.println(f.toString()));
@@ -112,7 +109,7 @@ public class Florist {
 		CsvProcessor<Decor> csvProcessor = new CsvProcessor<Decor>(Decor.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + this.name + "decorDataBase.txt";
+        String outputFile = absolutePath + "." + this.name + "DataBase/decorDataBase.txt";
         File csvFile = new File(outputFile);
         decorList = (ArrayList<Decor>) csvProcessor.readAll(csvFile, null);
         decorList.forEach(f -> System.out.println(f.toString()));
@@ -124,7 +121,7 @@ public class Florist {
 		CsvProcessor<Ticket> csvProcessor = new CsvProcessor<Ticket>(Ticket.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + this.name + "ticketDataBase.txt";
+        String outputFile = absolutePath + "." + this.name + "DataBase/ticketDataBase.txt";
         File csvFile = new File(outputFile);
         ticketList = (ArrayList<Ticket>) csvProcessor.readAll(csvFile, null);
         ticketList.forEach(f -> System.out.println(f.toString()));	
@@ -141,7 +138,7 @@ public class Florist {
 		
 	}
 	
-	//cambiar de clase
+
 	public <T> int findIndex(List<T> list, Object obj) {
 		
 		Optional<Integer> index = IntStream.range(0, list.size())
@@ -193,7 +190,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat d'abres a afegir:");
 
-		Tree tree = new Tree(name, price, height, stock);
+		Tree tree = new Tree(name, price, stock,  height);
 		if (findTree(tree) == null) {
 			treeList.add(tree);
 			System.out.println("Abre afegit: " + tree);
@@ -228,7 +225,7 @@ public class Florist {
 
 		System.out.println("Arbres actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
+		treeList.forEach(tree -> System.out.println("ID:" + treeList.indexOf(tree) + "	Nom: " + tree.getName() + "	Alçada: "
 				+ tree.getHeight() + "	Stock: " + tree.getStock()));
 
 	}
@@ -248,7 +245,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat de flors a afegir:");
 
-		Flower flower = new Flower(name, price, colour, stock);
+		Flower flower = new Flower(name, price, stock, colour);
 		if (findFlower(flower) == null) {
 			flowerList.add(flower);
 			System.out.println("Flor afegida: " + flower);
@@ -305,7 +302,7 @@ public class Florist {
 
 		stock = Input.readInt("Introdueix la quantitat de objectes decoratius a afegir:");
 
-		Decor decor = new Decor(name, price, material, stock);
+		Decor decor = new Decor(name, price, stock, material);
 		if (findDecor(decor) == null) {
 			decorList.add(decor);
 			System.out.println("Decoració afegida: " + decor);

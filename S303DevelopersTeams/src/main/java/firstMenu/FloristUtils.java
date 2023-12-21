@@ -49,6 +49,7 @@ public class FloristUtils {
 	}
 
 	public void addFlorist() throws Exception {
+		
 		showFlorists();
 		int id = requestIdAdd();
 		
@@ -87,47 +88,24 @@ public class FloristUtils {
 	}
  
 
-//	public static void  createDataBase() {
-//		
-//		Florist f = new Florist("Floristeria 1");
-//		Florist flo = new Florist("Floristeria 2");
-//		
-//		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
-//		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
-//		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
-//		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
-//		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
-//		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
-//		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
-//		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
-//		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-//		flo.getFlowerList().add(new Flower("flor3", 2, "lila", 2));
-//				
-//	    florists.add(f);
-//	    florists.add(flo);
-//
-//		
-//	}
 
 	public static void  createDataBase() {
 		
 		Florist f = new Florist("Floristeria 1");
 		Florist flo = new Florist("Floristeria 2");
 
-		f.getTreeList().add(new Tree("arbre1", 33, 12, 3));
-		f.getTreeList().add(new Tree("arbre2", 23.1f, 13, 1));
-		f.getTreeList().add(new Tree("arbre3", 2.6f, 14, 1));
-		f.getTreeList().add(new Tree("arbre4", 2.6f, 15, 1));
-		f.getTreeList().add(new Tree("arbre5", 27.5f, 16, 1));
-		f.getTreeList().add(new Tree("arbre6", 28.6f, 17, 1));
-		f.getFlowerList().add(new Flower("flor1", 2, "blau", 2));
-		f.getFlowerList().add(new Flower("flor2", 2, "blau", 5));
-		f.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-		flo.getDecorList().add(new Decor("decor1", 2, "fusta", 2));
-		flo.getFlowerList().add(new Flower("flor3", 2, "lila", 2));
+		f.getTreeList().add(new Tree("arbre1", 12, 3, 33.9f));
+		f.getTreeList().add(new Tree("arbre2", 13, 1, 23.1f));
+		f.getTreeList().add(new Tree("arbre3", 14, 1, 2.6f));
+		f.getTreeList().add(new Tree("arbre4", 15, 1, 2.6f));
+		f.getTreeList().add(new Tree("arbre5", 16, 1, 27.5f));
+		f.getTreeList().add(new Tree("arbre6", 17, 1, 28.6f));
+		f.getFlowerList().add(new Flower("flor1", 2, 2, "blau"));
+		f.getFlowerList().add(new Flower("flor2", 2, 5, "blau"));
+		f.getDecorList().add(new Decor("decor1", 2, 2, "fusta"));
+		flo.getDecorList().add(new Decor("decor1", 2, 2, "fusta"));
+		flo.getDecorList().add(new Decor("decor1", 2, 2, "fusta"));
+		flo.getFlowerList().add(new Flower("flor3", 2, 2, "lila"));
 
 		florists.add(f);
 		florists.add(flo);
@@ -140,7 +118,7 @@ public class FloristUtils {
         CsvProcessor<Florist> csvProcessor = new CsvProcessor<Florist>(Florist.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + ".floristDataBase.txt";
+        String outputFile = absolutePath + "DataBase/floristDataBase.txt";
         File csvFile = new File(outputFile);
         //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         florists = (ArrayList<Florist>) csvProcessor.readAll(csvFile, null);
@@ -161,7 +139,7 @@ public class FloristUtils {
 		
 		CsvProcessor<Florist> csvProcessor = new CsvProcessor<Florist>(Florist.class);
 		String absolutePath = new File("").getAbsolutePath();
-		String outputFile = absolutePath + ".floristDataBase.txt";
+		String outputFile = absolutePath + "/DataBase/floristDataBase.txt";
 		File csvFile = new File(outputFile);
 		csvProcessor.writeAll(csvFile, florists, true);
 		System.out.println("Floristeries guardades exitosament a la base de dades.");
@@ -172,7 +150,7 @@ public class FloristUtils {
 		for (Florist florist : florists) {
 			CsvProcessor<Decor> csvProcessor = new CsvProcessor<Decor>(Decor.class);
 			String absolutePath = new File("").getAbsolutePath();
-			String outputFile = absolutePath + "."+florist.getName()+"decorDataBase.txt";
+			String outputFile = absolutePath + "."+florist.getName()+"/DataBase/decorDataBase.txt";
 			File csvFile = new File(outputFile);
 			csvProcessor.writeAll(csvFile, florist.getDecorList(), true);
 			System.out.println("Decoracions de la floristeria "+florist.getName() +" guardades exitosament a la base de dades.");
@@ -183,7 +161,7 @@ public class FloristUtils {
 		for (Florist florist : florists) {
 			CsvProcessor<Tree> csvProcessor = new CsvProcessor<Tree>(Tree.class);
 			String absolutePath = new File("").getAbsolutePath();
-			String outputFile = absolutePath + "."+florist.getName()+"treeDataBase.txt";
+			String outputFile = absolutePath + "."+florist.getName()+"DataBase/treeDataBase.txt";
 			File csvFile = new File(outputFile);
 			csvProcessor.writeAll(csvFile, florist.getTreeList(), true);
 			System.out.println("Arbres de la floristeria "+florist.getName() +" guardats exitosament a la base de dades.");
@@ -195,7 +173,7 @@ public class FloristUtils {
 		for (Florist florist : florists) {
 			CsvProcessor<Flower> csvProcessor = new CsvProcessor<Flower>(Flower.class);
 			String absolutePath = new File("").getAbsolutePath();
-			String outputFile = absolutePath + "."+florist.getName()+"flowerDataBase.txt";
+			String outputFile = absolutePath + "."+florist.getName()+"DataBase/flowerDataBase.txt";
 			File csvFile = new File(outputFile);
 			csvProcessor.writeAll(csvFile, florist.getFlowerList(), true);
 			System.out.println("Flors de la floristeria "+florist.getName() +" guardades exitosament a la base de dades.");
@@ -206,7 +184,7 @@ public class FloristUtils {
 		for (Florist florist : florists) {
 			CsvProcessor<Ticket> csvProcessor = new CsvProcessor<Ticket>(Ticket.class);
 			String absolutePath = new File("").getAbsolutePath();
-			String outputFile = absolutePath + "."+florist.getName()+"ticketDataBase.txt";
+			String outputFile = absolutePath + "."+florist.getName()+"DataBase/ticketDataBase.txt";
 			File csvFile = new File(outputFile);
 			csvProcessor.writeAll(csvFile, florist.getTicketList(), true);
 			System.out.println("Tickets de la floristeria "+florist.getName() +" guardades exitosament a la base de dades.");

@@ -126,7 +126,7 @@ public class Ticket {
 		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
 
         String absolutePath = new File("").getAbsolutePath();
-        String outputFile = absolutePath + "." + id +"Ticket"+ floristName + "productDataBase.txt";
+        String outputFile = absolutePath + "." + id +"Ticket"+ floristName + "DataBase/productDataBase.txt";
         File csvFile = new File(outputFile);
         productsList = (ArrayList<Product>) csvProcessor.readAll(csvFile, null);
         productsList.forEach(p -> System.out.println(p.toString()));	
@@ -136,7 +136,7 @@ public class Ticket {
 
 		CsvProcessor<Product> csvProcessor = new CsvProcessor<Product>(Product.class);
 		String absolutePath = new File("").getAbsolutePath();
-		String outputFile = absolutePath + "." + id +"Ticket"+floristName + "productDataBase.txt";
+		String outputFile = absolutePath + "." + id +"Ticket"+floristName + "DataBase/productDataBase.txt";
 		File csvFile = new File(outputFile);
 		csvProcessor.writeAll(csvFile, productsList, true);
 		System.out.println("Productes del ticket "+ floristName +" guardades exitosament a la base de dades.");

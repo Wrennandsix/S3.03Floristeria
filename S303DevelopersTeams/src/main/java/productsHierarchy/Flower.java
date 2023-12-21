@@ -5,8 +5,8 @@ import java.util.Objects;
 import com.j256.simplecsv.common.CsvColumn;
 
 public class Flower extends Product {
-	@CsvColumn(columnName = "colour")
-	private String colour;
+//	@CsvColumn(columnName = "colour")
+//	private String colour;
 	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
@@ -14,14 +14,14 @@ public class Flower extends Product {
 	public Flower() {
 		this.id = ++nextId;
 	}
-	public Flower(String name, float price, String colour,int stock) {
-		super(name, price, stock);
+	public Flower(String name, float price, int stock, String colour) {
+		super(name, price, stock, 0f, colour, null);
 		this.colour = colour;
 		this.id = ++nextId;
 	}
 	
 	public Flower(Flower flower) {
-		super(flower.getName(), flower.getPrice(), flower.getStock());
+		super(flower.getName(), flower.getPrice(), flower.getStock(), 0f, flower.getColour(), null);
 		this.colour = flower.getColour();
 
 	}

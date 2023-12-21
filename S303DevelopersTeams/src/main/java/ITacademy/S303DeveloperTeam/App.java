@@ -1,5 +1,6 @@
 package ITacademy.S303DeveloperTeam;
 
+
 import Florist.Florist;
 import firstMenu.FirstMenu;
 import firstMenu.FloristUtils;
@@ -95,10 +96,10 @@ public class App {
 				break;
 			case 0:
 				try {
+					FloristUtils.writeFlorists();
 					FloristUtils.writeDecors();
 					FloristUtils.writeTrees();
 					FloristUtils.writeFlowers();
-					FloristUtils.writeFlorists();
 					FloristUtils.writeTickets();
 					FloristUtils.writeProducts();
 				} catch (Exception e) {
