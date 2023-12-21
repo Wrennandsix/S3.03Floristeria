@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.j256.simplecsv.common.CsvColumn;
 
 public class Decor extends Product {
-	
 //	@CsvColumn(columnName = "material")
 //	private String material;
 	@CsvColumn(columnName = "id")

@@ -1,18 +1,22 @@
 package firstMenu;
 
 
+import java.io.IOException;
+import java.text.ParseException;
+
 import Florist.Florist;
 import input.Input;
 
 public class FirstMenu {
 
 	public static Florist firstMenu() {
+
 		
 		FloristUtils manager = new FloristUtils();		
 		//FloristUtils.createDataBase();
 
 		int choice;
-		
+
 		Florist florist = null;
 
 		do {
@@ -40,18 +44,18 @@ public class FirstMenu {
 		return florist;
 	}
 
-public static int menu() {
-		
-	int option = 0;
-	try {
-		option = Input.readInt("*** Welcome florist acces ***\n"
-				+ "1- Afegir una floristeria a la base de dades.\n"
-				+ "2- Accedir a una floristeria existent a la base de dades.");
-	} catch (Exception e) {
-		e.printStackTrace();
+	public static int menu() {
+
+		int option = 0;
+		try {
+			option = Input.readInt("*** Welcome florist acces ***\n"
+					+ "1- Afegir una floristeria a la base de dades.\n"
+					+ "2- Accedir a una floristeria existent a la base de dades.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return option;
 	}
-	return option;
-}
 
 
 }

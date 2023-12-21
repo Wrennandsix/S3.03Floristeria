@@ -89,9 +89,8 @@ public class Florist {
         String absolutePath = new File("").getAbsolutePath();
         String outputFile = absolutePath + "." + this.name + "treeDataBase.txt";
         File csvFile = new File(outputFile);
-        //List<Florist> floristsA = csvProcessor.readAll(csvFile, null);
         treeList = (ArrayList<Tree>) csvProcessor.readAll(csvFile, null);
-        treeList.forEach(t -> System.out.println(t.toString()));
+       //treeList.forEach(t -> System.out.println(t.toString()));
 
     }
 	
@@ -103,7 +102,7 @@ public class Florist {
         String outputFile = absolutePath + "." + this.name + "flowerDataBase.txt";	
         File csvFile = new File(outputFile);
         flowerList = (ArrayList<Flower>) csvProcessor.readAll(csvFile, null);
-        flowerList.forEach(f -> System.out.println(f.toString()));
+        //flowerList.forEach(f -> System.out.println(f.toString()));
 
     }
 	
@@ -115,7 +114,7 @@ public class Florist {
         String outputFile = absolutePath + "." + this.name + "decorDataBase.txt";
         File csvFile = new File(outputFile);
         decorList = (ArrayList<Decor>) csvProcessor.readAll(csvFile, null);
-        decorList.forEach(f -> System.out.println(f.toString()));
+        //decorList.forEach(f -> System.out.println(f.toString()));
 
     }
 	
@@ -127,18 +126,17 @@ public class Florist {
         String outputFile = absolutePath + "." + this.name + "ticketDataBase.txt";
         File csvFile = new File(outputFile);
         ticketList = (ArrayList<Ticket>) csvProcessor.readAll(csvFile, null);
-        ticketList.forEach(f -> System.out.println(f.toString()));	
+        //ticketList.forEach(f -> System.out.println(f.toString()));	
 	}
 	
 	public void readProducts() {
 		ticketList.forEach(t -> {
 			try {
 				t.readProducts();
-			} catch (Exception e) {
+			} catch (IOException | ParseException e) {
 				e.printStackTrace();
 			}
 		});
-		
 	}
 	
 
@@ -228,7 +226,7 @@ public class Florist {
 
 		System.out.println("Arbres actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		treeList.forEach(tree -> System.out.println("ID:" + tree.getId() + "	Nom: " + tree.getName() + "	Alçada: "
+		treeList.forEach(tree -> System.out.println("ID:" + (treeList.indexOf(tree) + 1) + "	Nom: " + tree.getName() + "	Alçada: "
 				+ tree.getHeight() + "	Stock: " + tree.getStock()));
 
 	}
@@ -286,7 +284,7 @@ public class Florist {
 
 		System.out.println("Flors actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		flowerList.forEach(flower -> System.out.println("ID:" + flower.getId() + "	Nom: " + flower.getName() + "	Color: "
+		flowerList.forEach(flower -> System.out.println("ID:" + (flowerList.indexOf(flower) + 1) + "	Nom: " + flower.getName() + "	Color: "
 				+ flower.getColour() + "	Stock: " + flower.getStock()));
 
 	}
@@ -341,7 +339,7 @@ public class Florist {
 
 		System.out.println("Decoracions actuals a la base de dades de la floristeria: " + name + " amb id:" + id + ":");
 
-		decorList.forEach(decor -> System.out.println("ID:" + decor.getId() + "	Nom: " + decor.getName() + "	Material: "
+		decorList.forEach(decor -> System.out.println("ID:" + (decorList.indexOf(decor) + 1) + "	Nom: " + decor.getName() + "	Material: "
 				+ decor.getMaterial() + "	Stock: " + decor.getStock()));
 
 	}
