@@ -516,7 +516,7 @@ public class Florist {
 	public void addTicket() {
 		
 		Ticket ticket = new Ticket();
-		ticket.setName("Ticket" + this.name);
+		ticket.setName(this.name);
 		ticket.setFlorist(this);
 		
 		try {

@@ -1,0 +1,4 @@
+"name","price","stock"
+"arbre3",2.6,1
+"flor1",2.0,2
+"arbre1",33.0,1
