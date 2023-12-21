@@ -1,0 +1,2 @@
+"id","name","price","stock","height","colour","material"
+8,"javiabre",99.0,2,66.9,"",""
