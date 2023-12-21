@@ -1,2 +1,2 @@
 "id","name","price","stock","height","colour","material"
-7,"abre1",12.0,6,33.9,"",""
+1,"Test",2.5,2,0.0,"","Plastic"

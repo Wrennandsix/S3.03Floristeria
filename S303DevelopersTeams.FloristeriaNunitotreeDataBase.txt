@@ -1,1 +1,2 @@
 "id","name","price","stock","height","colour","material"
+1,"Pi",12.4,3,33.9,"",""

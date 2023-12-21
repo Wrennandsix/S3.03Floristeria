@@ -1,2 +1,0 @@
-"id","name","price","stock","height","colour","material"
-3,"flor3",2.0,2,0.0,"lila",""

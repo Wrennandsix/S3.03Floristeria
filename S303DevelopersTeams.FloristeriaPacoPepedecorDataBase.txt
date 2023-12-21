@@ -1,1 +1,0 @@
-"id","name","price","stock","height","colour","material"

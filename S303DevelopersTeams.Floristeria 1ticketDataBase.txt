@@ -1,2 +1,0 @@
-"name","price","id"
-"Floristeria 1",30.0,1
