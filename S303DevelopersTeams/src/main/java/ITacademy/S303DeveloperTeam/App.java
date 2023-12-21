@@ -21,8 +21,6 @@ public class App {
 		//FloristUtils.createDataBase();
 		Florist f = FirstMenu.firstMenu();
 
-		
-	
 		int choice;
 
 		do {
@@ -93,18 +91,20 @@ public class App {
 			case 12:
 				f.printTotalProfit();
 				break;
+			case 14:
+				
+				break;
 			case 0:
 				try {
+					FloristUtils.writeFlorists();
 					FloristUtils.writeDecors();
 					FloristUtils.writeTrees();
 					FloristUtils.writeFlowers();
-					FloristUtils.writeFlorists();
 					FloristUtils.writeTickets();
 					FloristUtils.writeProducts();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
 				System.out.println("Fins aviat maco!");
 				break;
 
@@ -135,7 +135,6 @@ public class App {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return option;
 	}
 

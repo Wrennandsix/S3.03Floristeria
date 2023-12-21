@@ -5,8 +5,8 @@ import java.util.Objects;
 import com.j256.simplecsv.common.CsvColumn;
 
 public class Tree extends Product {
-	@CsvColumn(columnName = "height")
-	private float height;
+//	@CsvColumn(columnName = "height")
+//	private float height;
 	@CsvColumn(columnName = "id")
 	private int id;
 	private static int nextId = 0;
@@ -15,14 +15,13 @@ public class Tree extends Product {
 		this.id = ++nextId;
 	}
 
-	public Tree(String name, float price, float height, int stock) {
-		super(name, price, stock);
-		this.height = height;
+	public Tree(String name, float price, int stock, float height) {
+		super(name, price, stock, height, null, null);
 		this.id = ++nextId;
 	}
 	
 	public Tree(Tree tree) {
-		super(tree.getName(), tree.getPrice(), tree.getStock());
+		super(tree.getName(), tree.getPrice(), tree.getStock(), tree.getHeight(), null, null);
 		this.height = tree.getHeight();
 
 	}
@@ -37,6 +36,10 @@ public class Tree extends Product {
 
 	public int getId() {
 		return id;
+	}
+	
+	public static void setNextId() {
+		nextId --;
 	}
 	
 	@Override

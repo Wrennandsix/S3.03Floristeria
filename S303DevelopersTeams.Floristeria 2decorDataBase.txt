@@ -1,0 +1,3 @@
+"id","name","price","stock","height","colour","material"
+2,"decor1",2.0,2,0.0,"","fusta"
+3,"decor1",2.0,2,0.0,"","fusta"
