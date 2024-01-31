@@ -1,6 +1,9 @@
 package ITacademy.S303DeveloperTeam;
 
 
+import java.io.IOException;
+import java.text.ParseException;
+
 import Florist.Florist;
 import firstMenu.FirstMenu;
 import firstMenu.FloristUtils;
@@ -11,15 +14,13 @@ public class App {
 	
 	public static void main(String[] args) {
 
-
 		try {
 			FloristUtils.readFlorists();
-		} catch (Exception e) {
+		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
-		
-		//FloristUtils.createDataBase();
 		Florist f = FirstMenu.firstMenu();
+		System.out.println(f.toString());
 
 		int choice;
 
